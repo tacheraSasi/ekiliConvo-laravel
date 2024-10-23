@@ -1,0 +1,43 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+
+/* Default light mode styles */
+.tox {
+    background-color: #ffffff; /* White background */
+    color: #000000; /* Black text */
+}
+html{
+    scroll-behavior: smooth;
+}
+
+.tox .tox-toolbar {
+    background-color: #f7fafc; /* Light gray for toolbar */
+    border-color: #e2e8f0; /* Light border */
+}
+
+.tox .tox-toolbar__group {
+    background-color: transparent; /* Transparent for toolbar buttons */
+}
+
+/* Dark mode styles */
+.dark .tox {
+    background-color: #2d3748; /* Dark gray background */
+    color: #f7fafc; /* Light text */
+}
+
+.dark .tox .tox-toolbar {
+    background-color: #4a5568; /* Darker gray for toolbar */
+    border-color: #2d3748; /* Dark border */
+}
+
+.dark .tox .tox-toolbar__group {
+    background-color: transparent; /* Transparent for toolbar buttons */
+}
+
+/* Additional styles for other TinyMCE components */
+.tox .tox-editor-header {
+    background-color: inherit; /* Make header transparent */
+}
