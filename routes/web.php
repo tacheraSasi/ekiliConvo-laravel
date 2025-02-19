@@ -17,9 +17,9 @@ Route::get('/', function () {
 });
 
 //ui testing route 
-Route::get("/ui",function (){
-    return view("ui");
-});
+// Route::get("/ui",function (){
+//     return view("ui");
+// });
 
 Route::get('/dashboard', function () {
     return redirect(route("home"));
