@@ -68,8 +68,8 @@
                     <!-- Navigation -->
                     <nav class="flex-1 space-y-2 custom-scrollbar overflow-y-auto">
                         <a href="#" class="nav-item active">
-                            <div class="nav-icon-container flex items-center justify-center w-10 h-10 rounded-lg bg-white/50 dark:bg-slate-700/50 transition-transform">
-                                <i class="fas fa-home text-lg"></i>
+                            <div class="nav-icon-container flex items-center justify-center w-10 h-10 rounded-lg bg-brand-primary/20 dark:bg-brand-primary/30 transition-transform">
+                                <i class="fas fa-home text-lg text-brand-dark dark:text-brand-primary"></i>
                             </div>
                             <div>
                                 <span class="font-medium">Lobby</span>
@@ -77,9 +77,9 @@
                             </div>
                         </a>
                         
-                        <a href="#" class="nav-item hover:bg-white/30 dark:hover:bg-slate-700/30">
+                        <a href="#" class="nav-item hover:bg-brand-primary/10 dark:hover:bg-brand-primary/20">
                             <div class="nav-icon-container flex items-center justify-center w-10 h-10 rounded-lg bg-white/20 dark:bg-slate-700/20 transition-transform">
-                                <i class="fas fa-users text-lg text-gray-600 dark:text-slate-400"></i>
+                                <i class="fas fa-users text-lg text-gray-600 dark:text-slate-400 hover:text-brand-secondary"></i>
                             </div>
                             <div>
                                 <span>Explore Rooms</span>
@@ -87,9 +87,9 @@
                             </div>
                         </a>
                         
-                        <a href="#" class="nav-item hover:bg-white/30 dark:hover:bg-slate-700/30">
+                        <a href="#" class="nav-item hover:bg-brand-primary/10 dark:hover:bg-brand-primary/20">
                             <div class="nav-icon-container flex items-center justify-center w-10 h-10 rounded-lg bg-white/20 dark:bg-slate-700/20 transition-transform">
-                                <i class="fas fa-history text-lg text-gray-600 dark:text-slate-400"></i>
+                                <i class="fas fa-history text-lg text-gray-600 dark:text-slate-400 hover:text-brand-secondary"></i>
                             </div>
                             <div>
                                 <span>Recent Calls</span>
@@ -97,9 +97,9 @@
                             </div>
                         </a>
                         
-                        <a href="#" class="nav-item hover:bg-white/30 dark:hover:bg-slate-700/30">
+                        <a href="#" class="nav-item hover:bg-brand-primary/10 dark:hover:bg-brand-primary/20">
                             <div class="nav-icon-container flex items-center justify-center w-10 h-10 rounded-lg bg-white/20 dark:bg-slate-700/20 transition-transform">
-                                <i class="fas fa-cog text-lg text-gray-600 dark:text-slate-400"></i>
+                                <i class="fas fa-cog text-lg text-gray-600 dark:text-slate-400 hover:text-brand-secondary"></i>
                             </div>
                             <div>
                                 <span>Settings</span>
