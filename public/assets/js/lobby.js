@@ -1,26 +1,20 @@
-let form = document.getElementById('lobby__form')
-console.log(form)
-console.log(user_id)
+// Restore display name if available
 let displayName = sessionStorage.getItem('display_name')
 if(displayName){
-    form.name.value = displayName
+    // Try to restore name in authenticated user form
+    let nameInput = document.querySelector('input[name="name"]')
+    if (nameInput && !nameInput.value) {
+        nameInput.value = displayName
+    }
+    
+    // Try to restore name in guest form
+    let guestNameInput = document.querySelector('input[name="guest_name"]')
+    if (guestNameInput) {
+        guestNameInput.value = displayName
+    }
 }
 
-form.addEventListener('submit', (e) => {
-    e.preventDefault()
-
-    sessionStorage.setItem('display_name', e.target.name.value)
-
-    let inviteCode = e.target.room.value
-    if(!inviteCode){
-        inviteCode = String(user_id)
-    }
-    window.location = `/room/${inviteCode}`
-})
-
-
-
-  document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded', function () {
     // Check if the browser supports notifications
     if ('Notification' in window) {
       // Request permission to show notifications
