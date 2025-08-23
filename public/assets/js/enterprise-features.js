@@ -1,5 +1,5 @@
 // Enterprise features for ekiliConvo rooms
-let isHost = false;
+let isHost = IS_HOST || false;
 let roomLocked = false;
 let recordingInProgress = false;
 let handRaised = false;

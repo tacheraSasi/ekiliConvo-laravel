@@ -119,7 +119,8 @@ class RoomController extends Controller
         return view('convo.room', [
             'room' => $room->name,
             'roomUuid' => $room->uuid,
-            'roomModel' => $room
+            'roomModel' => $room,
+            'isHost' => Auth::check() ? $room->isHost(Auth::user()) : false
         ]);
     }
 
