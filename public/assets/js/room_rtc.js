@@ -10,13 +10,8 @@ let client;
 let rtmClient;
 let channel;
 
-const queryString = window.location.search
-const urlParams = new URLSearchParams(queryString)
-let roomId = urlParams.get('room')
-
-if(!roomId){
-    roomId = 'main'
-}
+// Use room UUID from the page instead of URL params
+let roomId = ROOM_UUID || 'main'
 
 let displayName = sessionStorage.getItem('display_name')
 if(!displayName){
