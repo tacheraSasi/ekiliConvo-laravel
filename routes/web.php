@@ -3,6 +3,7 @@
 // use App\Http\Controllers\InsightController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RoomController;
+use App\Http\Controllers\AnalyticsDashboardController;
 // use App\Models\Insight;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -41,6 +42,12 @@ Route::middleware('auth')->group(function () {
     Route::get("/dashboard", [RoomController::class,"dashboard"])->name("dashboard");
     Route::post("/rooms", [RoomController::class,"store"])->name("rooms.store");
     Route::delete("/rooms/{uuid}", [RoomController::class,"destroy"])->name("rooms.destroy");
+    
+    // Analytics routes
+    Route::get('/analytics', [AnalyticsDashboardController::class, 'index'])->name('analytics.dashboard');
+    Route::get('/analytics/room/{roomUuid}', [AnalyticsDashboardController::class, 'room'])->name('analytics.room');
+    Route::get('/analytics/search', [AnalyticsDashboardController::class, 'search'])->name('analytics.search');
+    Route::get('/analytics/profile', [AnalyticsDashboardController::class, 'profile'])->name('analytics.profile');
 });
 
 // Public routes for room access (guests can join)

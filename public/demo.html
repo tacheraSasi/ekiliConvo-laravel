@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ekiliConvo Enhanced Features Demo</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="/assets/css/enhanced-features.css" rel="stylesheet">
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        .demo-header { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Demo Header -->
+    <div class="demo-header text-white py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h1 class="text-4xl font-bold mb-4">🚀 ekiliConvo Enhanced Features</h1>
+            <p class="text-xl opacity-90">Analytics, Collaboration, and Advanced Search</p>
+        </div>
+    </div>
+
+    <!-- Features Showcase -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        
+        <!-- Analytics Dashboard Preview -->
+        <div class="mb-16">
+            <h2 class="text-3xl font-bold text-gray-900 mb-8">📊 Analytics Dashboard</h2>
+            
+            <!-- Metrics Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                <div class="bg-white rounded-lg shadow-sm p-6 border border-gray-200">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-sm font-medium text-gray-600">Total Rooms</p>
+                            <p class="text-3xl font-bold text-gray-900">127</p>
+                        </div>
+                        <div class="p-3 bg-blue-100 rounded-full">
+                            <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="mt-4">
+                        <span class="text-sm text-gray-500">You created 23 rooms</span>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-sm p-6 border border-gray-200">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-sm font-medium text-gray-600">Active Sessions</p>
+                            <p class="text-3xl font-bold text-gray-900">1,423</p>
+                        </div>
+                        <div class="p-3 bg-green-100 rounded-full">
+                            <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="mt-4">
+                        <span class="text-sm text-green-600">↗ 12% from last month</span>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-sm p-6 border border-gray-200">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-sm font-medium text-gray-600">Meeting Hours</p>
+                            <p class="text-3xl font-bold text-gray-900">2,156</p>
+                        </div>
+                        <div class="p-3 bg-purple-100 rounded-full">
+                            <svg class="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="mt-4">
+                        <span class="text-sm text-gray-500">Average 4.2h per room</span>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-sm p-6 border border-gray-200">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-sm font-medium text-gray-600">Quality Score</p>
+                            <p class="text-3xl font-bold text-gray-900">94%</p>
+                        </div>
+                        <div class="p-3 bg-yellow-100 rounded-full">
+                            <svg class="w-6 h-6 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="mt-4">
+                        <span class="text-sm text-gray-500">Excellent connection quality</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Chart Placeholder -->
+            <div class="bg-white rounded-lg shadow-sm p-6 border border-gray-200 mb-8">
+                <h3 class="text-lg font-semibold text-gray-900 mb-4">Activity Trends</h3>
+                <div class="h-64 bg-gradient-to-r from-blue-50 to-purple-50 rounded-lg flex items-center justify-center">
+                    <div class="text-center text-gray-600">
+                        <svg class="w-16 h-16 mx-auto mb-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                        </svg>
+                        <p class="text-lg font-medium">Interactive Analytics Charts</p>
+                        <p class="text-sm">Real-time data visualization with Chart.js/D3.js</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Search Interface Preview -->
+        <div class="mb-16">
+            <h2 class="text-3xl font-bold text-gray-900 mb-8">🔍 Advanced Search</h2>
+            
+            <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6 mb-6">
+                <div class="flex space-x-4 mb-6">
+                    <div class="flex-1">
+                        <input 
+                            type="text" 
+                            placeholder="Search rooms, notes, recordings..." 
+                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                            value="team meeting"
+                        >
+                    </div>
+                    <select class="px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
+                        <option>All</option>
+                        <option>Rooms</option>
+                        <option>Notes</option>
+                        <option>Recordings</option>
+                    </select>
+                    <button class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium flex items-center">
+                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                        </svg>
+                        Search
+                    </button>
+                </div>
+
+                <!-- Sample Search Results -->
+                <div class="space-y-4">
+                    <div class="border-b border-gray-200 pb-4">
+                        <h3 class="text-lg font-semibold text-gray-900">Search Results</h3>
+                        <p class="text-sm text-gray-600">Found 12 results for "team meeting"</p>
+                    </div>
+
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+                            <div class="flex items-center space-x-4">
+                                <div class="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center">
+                                    <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h4 class="font-medium text-gray-900">Weekly Team Meeting</h4>
+                                    <p class="text-sm text-gray-600">Development team sync - 23 sessions, 45 participants</p>
+                                </div>
+                            </div>
+                            <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-xs font-medium">Room</span>
+                        </div>
+
+                        <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+                            <div class="flex items-center space-x-4">
+                                <div class="w-10 h-10 bg-yellow-100 rounded-lg flex items-center justify-center">
+                                    <svg class="w-5 h-5 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h4 class="font-medium text-gray-900">Team Meeting Action Items</h4>
+                                    <p class="text-sm text-gray-600">Follow-up tasks from last <mark>team meeting</mark> - 5 pending tasks</p>
+                                </div>
+                            </div>
+                            <span class="bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full text-xs font-medium">Task</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Collaboration Tools Preview -->
+        <div class="mb-16">
+            <h2 class="text-3xl font-bold text-gray-900 mb-8">📝 Collaboration Tools</h2>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- Notes Panel -->
+                <div class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
+                    <div class="px-6 py-4 bg-gray-50 border-b border-gray-200">
+                        <h3 class="text-lg font-semibold text-gray-900">Room Notes & Tasks</h3>
+                    </div>
+                    <div class="p-6">
+                        <!-- Sample Notes -->
+                        <div class="space-y-4">
+                            <div class="note-item agenda">
+                                <div class="note-header">
+                                    <div class="note-meta">
+                                        <span class="note-type agenda">agenda</span>
+                                        <span class="pinned">📌</span>
+                                    </div>
+                                </div>
+                                <div class="note-content">
+                                    <h4>Sprint Planning Discussion</h4>
+                                    <div class="note-text">Review user stories and estimate effort for next sprint. Focus on critical features.</div>
+                                </div>
+                                <div class="note-footer">
+                                    <span class="note-author">Sarah Johnson</span>
+                                    <span class="note-time">2 hours ago</span>
+                                </div>
+                            </div>
+
+                            <div class="note-item task">
+                                <div class="note-header">
+                                    <div class="note-meta">
+                                        <span class="note-type task">task</span>
+                                        <span class="overdue">⚠️</span>
+                                    </div>
+                                </div>
+                                <div class="note-content">
+                                    <h4>Update API Documentation</h4>
+                                    <div class="note-text">Add examples for new endpoints and update authentication section.</div>
+                                    <div class="due-date">Due: Tomorrow 5:00 PM</div>
+                                </div>
+                                <div class="note-footer">
+                                    <span class="note-author">Mike Chen</span>
+                                    <span class="note-time">1 day ago</span>
+                                </div>
+                            </div>
+
+                            <div class="note-item note">
+                                <div class="note-header">
+                                    <div class="note-meta">
+                                        <span class="note-type note">note</span>
+                                    </div>
+                                </div>
+                                <div class="note-content">
+                                    <div class="note-text">Great discussion on user feedback. Let's prioritize mobile responsiveness improvements.</div>
+                                </div>
+                                <div class="note-footer">
+                                    <span class="note-author">Alex Rivera</span>
+                                    <span class="note-time">3 hours ago</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Smart Suggestions -->
+                <div class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
+                    <div class="px-6 py-4 bg-gray-50 border-b border-gray-200">
+                        <h3 class="text-lg font-semibold text-gray-900">Smart Suggestions</h3>
+                    </div>
+                    <div class="p-6">
+                        <div class="space-y-4">
+                            <div class="border rounded-lg p-4 hover:bg-gray-50 transition-colors">
+                                <div class="flex items-start justify-between">
+                                    <div class="flex-1">
+                                        <h4 class="font-medium text-gray-900 mb-1">Continue working in Development Standup</h4>
+                                        <p class="text-sm text-gray-600 mb-2">Last active 2 hours ago</p>
+                                        <span class="inline-block bg-blue-100 text-blue-800 px-2 py-1 rounded text-xs">recent room</span>
+                                    </div>
+                                    <button class="bg-blue-600 hover:bg-blue-700 text-white px-3 py-1 rounded text-sm font-medium ml-4">
+                                        Join Room
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="border rounded-lg p-4 hover:bg-gray-50 transition-colors">
+                                <div class="flex items-start justify-between">
+                                    <div class="flex-1">
+                                        <h4 class="font-medium text-gray-900 mb-1">You have 3 pending task(s) in Project Review</h4>
+                                        <p class="text-sm text-gray-600 mb-2">Complete your action items</p>
+                                        <span class="inline-block bg-yellow-100 text-yellow-800 px-2 py-1 rounded text-xs">pending tasks</span>
+                                    </div>
+                                    <button class="bg-yellow-600 hover:bg-yellow-700 text-white px-3 py-1 rounded text-sm font-medium ml-4">
+                                        View Tasks
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="border rounded-lg p-4 hover:bg-gray-50 transition-colors">
+                                <div class="flex items-start justify-between">
+                                    <div class="flex-1">
+                                        <h4 class="font-medium text-gray-900 mb-1">Explore design rooms</h4>
+                                        <p class="text-sm text-gray-600 mb-2">12 rooms available</p>
+                                        <span class="inline-block bg-gray-100 text-gray-800 px-2 py-1 rounded text-xs">explore category</span>
+                                    </div>
+                                    <button class="bg-gray-600 hover:bg-gray-700 text-white px-3 py-1 rounded text-sm font-medium ml-4">
+                                        Browse
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quality Monitoring -->
+        <div class="mb-16">
+            <h2 class="text-3xl font-bold text-gray-900 mb-8">📡 Quality Monitoring</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-white rounded-lg shadow-sm p-6 border border-gray-200 text-center">
+                    <div class="quality-indicator good mx-auto mb-4">
+                        <span class="quality-score">94</span>
+                        <span class="quality-label">Quality</span>
+                    </div>
+                    <h3 class="font-semibold text-gray-900 mb-2">Connection Quality</h3>
+                    <p class="text-sm text-gray-600">Excellent - Low latency, stable connection</p>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-sm p-6 border border-gray-200 text-center">
+                    <div class="text-2xl font-bold text-green-600 mb-2">47ms</div>
+                    <h3 class="font-semibold text-gray-900 mb-2">Average Latency</h3>
+                    <p class="text-sm text-gray-600">Real-time monitoring of connection speed</p>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-sm p-6 border border-gray-200 text-center">
+                    <div class="text-2xl font-bold text-blue-600 mb-2">99.8%</div>
+                    <h3 class="font-semibold text-gray-900 mb-2">Uptime</h3>
+                    <p class="text-sm text-gray-600">Reliable service with automatic failover</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Feature List -->
+        <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-8">
+            <h2 class="text-3xl font-bold text-gray-900 mb-8 text-center">✨ All Enhanced Features</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div>
+                    <h3 class="text-lg font-semibold text-gray-900 mb-4">📊 Analytics & Insights</h3>
+                    <ul class="space-y-2 text-gray-600">
+                        <li>• Meeting statistics dashboard</li>
+                        <li>• Per-room analytics</li>
+                        <li>• Activity heatmaps</li>
+                        <li>• Quality monitoring</li>
+                        <li>• Usage trends</li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3 class="text-lg font-semibold text-gray-900 mb-4">🔍 Search & Organization</h3>
+                    <ul class="space-y-2 text-gray-600">
+                        <li>• Global search functionality</li>
+                        <li>• Room tagging system</li>
+                        <li>• Smart suggestions</li>
+                        <li>• Content categorization</li>
+                        <li>• Advanced filters</li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3 class="text-lg font-semibold text-gray-900 mb-4">📝 Collaboration Tools</h3>
+                    <ul class="space-y-2 text-gray-600">
+                        <li>• Shared notes & agendas</li>
+                        <li>• Task management</li>
+                        <li>• Action item tracking</li>
+                        <li>• Meeting summaries</li>
+                        <li>• Real-time collaboration</li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3 class="text-lg font-semibold text-gray-900 mb-4">🔔 Smart Notifications</h3>
+                    <ul class="space-y-2 text-gray-600">
+                        <li>• Meeting reminders</li>
+                        <li>• Task deadlines</li>
+                        <li>• Activity updates</li>
+                        <li>• Custom preferences</li>
+                        <li>• Browser notifications</li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3 class="text-lg font-semibold text-gray-900 mb-4">🎨 Customization</h3>
+                    <ul class="space-y-2 text-gray-600">
+                        <li>• User profiles & avatars</li>
+                        <li>• Customizable themes</li>
+                        <li>• Language preferences</li>
+                        <li>• Room branding</li>
+                        <li>• Accessibility options</li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3 class="text-lg font-semibold text-gray-900 mb-4">🛡️ Enterprise Ready</h3>
+                    <ul class="space-y-2 text-gray-600">
+                        <li>• Comprehensive audit logs</li>
+                        <li>• GDPR compliance</li>
+                        <li>• Admin dashboard</li>
+                        <li>• Security monitoring</li>
+                        <li>• Data export tools</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="bg-gray-900 text-white py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p class="text-lg">🎯 ekiliConvo Enhanced Features - Elevating Enterprise Video Conferencing</p>
+            <p class="text-gray-400 mt-2">Built with Laravel, Tailwind CSS, and modern web technologies</p>
+        </div>
+    </div>
+
+    <!-- Demo JavaScript -->
+    <script>
+        // Demo interactive elements
+        document.addEventListener('DOMContentLoaded', function() {
+            // Simulate real-time updates
+            setInterval(() => {
+                const qualityScore = document.querySelector('.quality-score');
+                if (qualityScore) {
+                    const scores = [92, 94, 96, 93, 95];
+                    const randomScore = scores[Math.floor(Math.random() * scores.length)];
+                    qualityScore.textContent = randomScore;
+                }
+            }, 5000);
+
+            console.log('✨ ekiliConvo Enhanced Features Demo Loaded');
+        });
+    </script>
+</body>
+</html>
