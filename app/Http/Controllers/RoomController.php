@@ -71,13 +71,41 @@ class RoomController extends Controller
     /**
      * Display the specified room
      */
-    public function show(string $uuid)
+    public function show(string $uuid, Request $request)
     {
         $room = Room::where('uuid', $uuid)->firstOrFail();
         
         // Check if room is expired
         if ($room->isExpired()) {
             return redirect()->route('lobby')->with('error', 'This room has expired.');
+        }
+
+        // Check if room requires password
+        if ($room->isPasswordProtected()) {
+            $password = $request->input('password') ?? session('room_password_' . $uuid);
+            
+            if (!$password || !$room->checkPassword($password)) {
+                return view('convo.room-password', [
+                    'roomUuid' => $room->uuid,
+                    'roomName' => $room->name
+                ]);
+            }
+            
+            // Store password in session for this room
+            session(['room_password_' . $uuid => $password]);
+        }
+
+        // Check if user can join (room lock status)
+        if (Auth::check()) {
+            $user = Auth::user();
+            if (!$room->canJoin($user)) {
+                return redirect()->route('lobby')->with('error', 'This room is locked and you cannot join.');
+            }
+        } else {
+            // For guests, check if room is locked
+            if ($room->is_locked) {
+                return redirect()->route('lobby')->with('error', 'This room is locked to new participants.');
+            }
         }
 
         // Add current user as participant if not already in the room
@@ -93,6 +121,29 @@ class RoomController extends Controller
             'roomUuid' => $room->uuid,
             'roomModel' => $room
         ]);
+    }
+
+    /**
+     * Validate room password
+     */
+    public function validatePassword(Request $request, string $uuid)
+    {
+        $request->validate([
+            'password' => 'required|string'
+        ]);
+
+        $room = Room::where('uuid', $uuid)->firstOrFail();
+        
+        if (!$room->isPasswordProtected()) {
+            return redirect()->route('room', $uuid);
+        }
+
+        if ($room->checkPassword($request->password)) {
+            session(['room_password_' . $uuid => $request->password]);
+            return redirect()->route('room', $uuid);
+        }
+
+        return back()->withErrors(['password' => 'Invalid room password.']);
     }
 
     /**

@@ -69,6 +69,76 @@ let handleChannelMessage = async (messageData, MemberId) => {
             }
         }
     }
+
+    // Enterprise features message handling
+    if(data.type === 'hand_status_changed'){
+        updateParticipantHandStatus(data.uid, data.hand_raised)
+        addBotMessageToDom(`${data.displayName} ${data.hand_raised ? 'raised their hand' : 'lowered their hand'}`)
+    }
+
+    if(data.type === 'force_mute'){
+        // If this is directed at current user, mute their microphone
+        if(data.target_uid == uid && localTracks && localTracks[0]){
+            await localTracks[0].setMuted(true)
+            let micButton = document.getElementById('mic-btn')
+            if(micButton) micButton.classList.remove('active')
+            addBotMessageToDom('You have been muted by the host')
+        }
+    }
+
+    if(data.type === 'participant_kicked'){
+        // If this is directed at current user, leave the room
+        if(data.target_uid == uid){
+            addBotMessageToDom('You have been removed from the room by the host')
+            setTimeout(() => {
+                window.location.href = '/lobby'
+            }, 2000)
+        }
+    }
+
+    if(data.type === 'room_lock_changed'){
+        updateRoomLockStatus(data.is_locked)
+        addBotMessageToDom(`Room has been ${data.is_locked ? 'locked' : 'unlocked'}`)
+    }
+
+    if(data.type === 'recording_status_changed'){
+        updateRecordingStatus(data.is_recording)
+        addBotMessageToDom(`Recording has been ${data.is_recording ? 'started' : 'stopped'}`)
+    }
+
+    if(data.type === 'reaction'){
+        showReactionMessage(data.displayName, data.emoji)
+        if(data.uid != uid) { // Don't show own reactions
+            showReactionAnimation(data.emoji)
+        }
+    }
+}
+
+// Helper functions for enterprise features
+function updateParticipantHandStatus(participantUid, handRaised) {
+    // Update the participant's hand status in the UI
+    loadRoomParticipants() // Refresh the participants list
+}
+
+function updateRoomLockStatus(isLocked) {
+    roomLocked = isLocked
+    // Update any lock indicators in the UI
+    const lockStatus = document.getElementById('lock-status')
+    if(lockStatus) {
+        lockStatus.textContent = isLocked ? 'Unlock Room' : 'Lock Room'
+    }
+}
+
+function updateRecordingStatus(isRecording) {
+    recordingInProgress = isRecording
+    const recordingIndicator = document.getElementById('recording-indicator')
+    if(recordingIndicator) {
+        recordingIndicator.style.display = isRecording ? 'flex' : 'none'
+    }
+}
+
+function showReactionMessage(displayName, emoji) {
+    addBotMessageToDom(`${displayName} reacted with ${emoji}`)
 }
 
 let sendMessage = async (e) => {
