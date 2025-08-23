@@ -35,6 +35,13 @@ Route::middleware(['auth'])->prefix('rooms/{roomUuid}')->group(function () {
     Route::post('/toggle-hand', [RoomControlController::class, 'toggleRaiseHand']);
     Route::get('/participants', [RoomControlController::class, 'getRoomParticipants']);
     
+    // Waiting room endpoints
+    Route::post('/toggle-waiting-room', [RoomControlController::class, 'toggleWaitingRoom']);
+    Route::get('/waiting-participants', [RoomControlController::class, 'getWaitingParticipants']);
+    Route::post('/admit-participant', [RoomControlController::class, 'admitParticipant']);
+    Route::post('/reject-participant', [RoomControlController::class, 'rejectParticipant']);
+    Route::get('/admission-status', [RoomControlController::class, 'checkAdmissionStatus']);
+    
     // Recording endpoints
     Route::post('/start-recording', [RecordingController::class, 'startRecording']);
     Route::post('/stop-recording', [RecordingController::class, 'stopRecording']);

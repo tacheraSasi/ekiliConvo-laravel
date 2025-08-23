@@ -281,7 +281,163 @@ class RoomControlController extends Controller
             'raised_hands_count' => $participants->where('hand_raised', true)->count(),
             'is_locked' => $room->is_locked,
             'has_password' => $room->isPasswordProtected(),
-            'is_recording' => $room->isRecording()
+            'is_recording' => $room->isRecording(),
+            'waiting_room_enabled' => $room->isWaitingRoomEnabled(),
+            'waiting_count' => $room->getWaitingCount()
+        ]);
+    }
+
+    /**
+     * Toggle waiting room (host only)
+     */
+    public function toggleWaitingRoom(string $roomUuid): JsonResponse
+    {
+        $room = Room::where('uuid', $roomUuid)->firstOrFail();
+        $currentUser = Auth::user();
+
+        if (!$room->isHost($currentUser)) {
+            return response()->json(['error' => 'Only hosts can toggle waiting room'], 403);
+        }
+
+        $room->waiting_room_enabled = !$room->waiting_room_enabled;
+        $room->save();
+
+        // Log the action
+        $action = $room->waiting_room_enabled ? 'waiting_room_enabled' : 'waiting_room_disabled';
+        RoomAuditLog::log(
+            $room->id,
+            $action,
+            $currentUser->id,
+            $currentUser->name
+        );
+
+        return response()->json([
+            'success' => true,
+            'waiting_room_enabled' => $room->waiting_room_enabled,
+            'message' => $room->waiting_room_enabled ? 'Waiting room enabled' : 'Waiting room disabled'
+        ]);
+    }
+
+    /**
+     * Get waiting room participants (host only)
+     */
+    public function getWaitingParticipants(string $roomUuid): JsonResponse
+    {
+        $room = Room::where('uuid', $roomUuid)->firstOrFail();
+        $currentUser = Auth::user();
+
+        if (!$room->isHost($currentUser)) {
+            return response()->json(['error' => 'Only hosts can view waiting participants'], 403);
+        }
+
+        $waitingParticipants = $room->getWaitingParticipants()->map(function ($user) {
+            return [
+                'id' => $user->id,
+                'name' => $user->name,
+                'joined_at' => $user->pivot->joined_at
+            ];
+        });
+
+        return response()->json([
+            'waiting_participants' => $waitingParticipants,
+            'count' => $waitingParticipants->count()
+        ]);
+    }
+
+    /**
+     * Admit participant from waiting room (host only)
+     */
+    public function admitParticipant(Request $request, string $roomUuid): JsonResponse
+    {
+        $request->validate([
+            'user_id' => 'required|integer|exists:users,id'
+        ]);
+
+        $room = Room::where('uuid', $roomUuid)->firstOrFail();
+        $currentUser = Auth::user();
+
+        if (!$room->isHost($currentUser)) {
+            return response()->json(['error' => 'Only hosts can admit participants'], 403);
+        }
+
+        $targetUser = \App\Models\User::findOrFail($request->user_id);
+        
+        if (!$room->admitParticipant($targetUser)) {
+            return response()->json(['error' => 'User is not waiting or not found'], 400);
+        }
+
+        // Log the action
+        RoomAuditLog::log(
+            $room->id,
+            'participant_admitted',
+            $currentUser->id,
+            $currentUser->name,
+            $targetUser->name
+        );
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Participant admitted successfully',
+            'user_id' => $targetUser->id
+        ]);
+    }
+
+    /**
+     * Reject participant from waiting room (host only)
+     */
+    public function rejectParticipant(Request $request, string $roomUuid): JsonResponse
+    {
+        $request->validate([
+            'user_id' => 'required|integer|exists:users,id'
+        ]);
+
+        $room = Room::where('uuid', $roomUuid)->firstOrFail();
+        $currentUser = Auth::user();
+
+        if (!$room->isHost($currentUser)) {
+            return response()->json(['error' => 'Only hosts can reject participants'], 403);
+        }
+
+        $targetUser = \App\Models\User::findOrFail($request->user_id);
+        
+        if (!$room->rejectParticipant($targetUser)) {
+            return response()->json(['error' => 'User is not waiting or not found'], 400);
+        }
+
+        // Log the action
+        RoomAuditLog::log(
+            $room->id,
+            'participant_rejected',
+            $currentUser->id,
+            $currentUser->name,
+            $targetUser->name
+        );
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Participant rejected successfully',
+            'user_id' => $targetUser->id
+        ]);
+    }
+
+    /**
+     * Check admission status for waiting participants
+     */
+    public function checkAdmissionStatus(string $roomUuid): JsonResponse
+    {
+        $room = Room::where('uuid', $roomUuid)->firstOrFail();
+        $currentUser = Auth::user();
+
+        if (!$room->isParticipant($currentUser) && !$room->isHost($currentUser)) {
+            return response()->json(['error' => 'Access denied'], 403);
+        }
+
+        $userInRoom = $room->users()->where('user_id', $currentUser->id)->first();
+        $status = $userInRoom ? $userInRoom->pivot->status : 'not_found';
+
+        return response()->json([
+            'status' => $status,
+            'participant_count' => $room->getAdmittedParticipants()->count()
         ]);
     }
 }
