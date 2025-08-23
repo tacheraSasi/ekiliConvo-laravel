@@ -143,7 +143,7 @@
             <h2 style="color: #ede0e0; margin-bottom: 20px;">Create New Room</h2>
             <form method="POST" action="{{ route('rooms.store') }}">
                 @csrf
-                <div style="display: grid; grid-template-columns: 1fr 200px auto; gap: 15px; align-items: end;">
+                <div style="display: grid; grid-template-columns: 1fr 200px 150px auto; gap: 15px; align-items: end;">
                     <div class="form-group">
                         <label for="name">Room Name</label>
                         <input type="text" id="name" name="name" required placeholder="Enter room name">
@@ -153,6 +153,13 @@
                         <select id="visibility" name="visibility">
                             <option value="public">Public</option>
                             <option value="private">Private</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="waiting_room_enabled">Waiting Room</label>
+                        <select id="waiting_room_enabled" name="waiting_room_enabled">
+                            <option value="0">Disabled</option>
+                            <option value="1">Enabled</option>
                         </select>
                     </div>
                     <div class="form-group">
@@ -174,6 +181,7 @@
                                 <div>Created: {{ $room->created_at->format('M j, Y g:i A') }}</div>
                                 <div>Visibility: {{ ucfirst($room->visibility) }}</div>
                                 <div>Participants: {{ $room->users->count() }}</div>
+                                <div>Waiting Room: {{ $room->waiting_room_enabled ? 'Enabled' : 'Disabled' }}</div>
                                 @if($room->expires_at)
                                     <div>Expires: {{ $room->expires_at->format('M j, Y g:i A') }}</div>
                                 @endif
