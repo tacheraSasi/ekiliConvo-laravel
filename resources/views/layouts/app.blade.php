@@ -77,13 +77,13 @@
     {{-- <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script> --}}
 </head>
 
-<body class="font-sans antialiased bg-gray-100 dark:bg-neutral-950">
+<body class="font-sans antialiased bg-gray-50 dark:bg-slate-900 text-gray-900 dark:text-slate-100">
     <div class="min-h-screen">
         @include('layouts.navigation')
 
         <!-- Page Heading -->
         @isset($header)
-            <header class="bg-white dark:bg-neutral-900 shadow">
+            <header class="bg-white dark:bg-slate-800 shadow-sm border-b border-gray-200 dark:border-slate-700">
                 <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
                     {{ $header }}
                 </div>

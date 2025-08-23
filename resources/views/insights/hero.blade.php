@@ -7,7 +7,7 @@
             Welcome to ekiliConvo! Create a room, invite your friends, and chat away—no limits, no sign-ups, just instant video rooms for all your conversations.
         </p>
         <div class="mt-8">
-            <a href="{{route('home')}}" class="px-6 py-3 bg-customGreenDark text-white dark:bg-customGreenLight dark:text-neutral-900 font-semibold rounded-md shadow-md hover:bg-neutral-800 dark:hover:bg-neutral-200 transition duration-300">
+            <a href="{{route('home')}}" class="px-6 py-3 bg-brand-secondary text-white dark:bg-brand-primary dark:text-brand-darker font-semibold rounded-md shadow-md hover:bg-brand-dark dark:hover:bg-brand-light hover:text-white dark:hover:text-brand-darker transition duration-300">
                 Create Your Room
             </a>
         </div>
