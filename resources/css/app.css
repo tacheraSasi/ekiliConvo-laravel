@@ -2,42 +2,182 @@
 @tailwind components;
 @tailwind utilities;
 
-
-
-/* Default light mode styles */
-.tox {
-    background-color: #ffffff; /* White background */
-    color: #000000; /* Black text */
+/* Modern CSS Variables for Theme Support */
+:root {
+    /* Light theme */
+    --color-bg-primary: #ffffff;
+    --color-bg-secondary: #f8fafc;
+    --color-bg-tertiary: #f1f5f9;
+    --color-text-primary: #1e293b;
+    --color-text-secondary: #64748b;
+    --color-text-muted: #94a3b8;
+    --color-border: #e2e8f0;
+    --color-glass-bg: rgba(255, 255, 255, 0.25);
+    --color-glass-border: rgba(255, 255, 255, 0.18);
+    --shadow-glass: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
 }
-html{
+
+.dark {
+    /* Dark theme */
+    --color-bg-primary: #0f172a;
+    --color-bg-secondary: #1e293b;
+    --color-bg-tertiary: #334155;
+    --color-text-primary: #f1f5f9;
+    --color-text-secondary: #cbd5e1;
+    --color-text-muted: #64748b;
+    --color-border: #475569;
+    --color-glass-bg: rgba(0, 0, 0, 0.25);
+    --color-glass-border: rgba(255, 255, 255, 0.08);
+    --shadow-glass: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
+}
+
+/* Global Styles */
+html {
     scroll-behavior: smooth;
 }
 
+body {
+    font-family: 'Figtree', sans-serif;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Glass Morphism Components */
+.glass {
+    background: var(--color-glass-bg);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--color-glass-border);
+    box-shadow: var(--shadow-glass);
+    transition: all 0.3s ease;
+}
+
+.glass:hover {
+    background: rgba(255, 255, 255, 0.35);
+    transform: translateY(-2px);
+}
+
+.dark .glass:hover {
+    background: rgba(0, 0, 0, 0.35);
+}
+
+/* Modern Card Component */
+.modern-card {
+    @apply bg-white dark:bg-slate-800 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-200 dark:border-slate-700;
+}
+
+/* Custom Scrollbar */
+.custom-scrollbar::-webkit-scrollbar {
+    width: 6px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+    @apply bg-gray-100 dark:bg-slate-700 rounded-full;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+    @apply bg-gray-300 dark:bg-slate-500 rounded-full hover:bg-gray-400 dark:hover:bg-slate-400;
+}
+
+/* Modern Button Styles */
+.btn-modern {
+    @apply px-6 py-3 rounded-lg font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2;
+}
+
+.btn-primary {
+    @apply btn-modern bg-brand-primary hover:bg-brand-secondary text-slate-900 focus:ring-brand-primary;
+}
+
+.btn-secondary {
+    @apply btn-modern bg-gray-200 dark:bg-slate-700 hover:bg-gray-300 dark:hover:bg-slate-600 text-gray-900 dark:text-slate-100 focus:ring-gray-300 dark:focus:ring-slate-500;
+}
+
+/* TinyMCE Dark Mode Support */
+.tox {
+    background-color: var(--color-bg-primary);
+    color: var(--color-text-primary);
+    border-color: var(--color-border);
+}
+
 .tox .tox-toolbar {
-    background-color: #f7fafc; /* Light gray for toolbar */
-    border-color: #e2e8f0; /* Light border */
+    background-color: var(--color-bg-secondary);
+    border-color: var(--color-border);
 }
 
 .tox .tox-toolbar__group {
-    background-color: transparent; /* Transparent for toolbar buttons */
+    background-color: transparent;
 }
 
-/* Dark mode styles */
-.dark .tox {
-    background-color: #2d3748; /* Dark gray background */
-    color: #f7fafc; /* Light text */
-}
-
-.dark .tox .tox-toolbar {
-    background-color: #4a5568; /* Darker gray for toolbar */
-    border-color: #2d3748; /* Dark border */
-}
-
-.dark .tox .tox-toolbar__group {
-    background-color: transparent; /* Transparent for toolbar buttons */
-}
-
-/* Additional styles for other TinyMCE components */
 .tox .tox-editor-header {
-    background-color: inherit; /* Make header transparent */
+    background-color: inherit;
+}
+
+/* Theme Toggle Animation */
+.theme-toggle {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.theme-toggle:hover {
+    transform: scale(1.05);
+}
+
+/* Modern Form Elements */
+.form-input {
+    @apply w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-slate-600 bg-white dark:bg-slate-700 text-gray-900 dark:text-slate-100 placeholder-gray-500 dark:placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-brand-primary focus:border-transparent transition-all duration-200;
+}
+
+/* Loading Animation */
+.loading-spinner {
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+/* Floating Action Button */
+.fab {
+    @apply fixed bottom-6 right-6 w-14 h-14 bg-brand-primary hover:bg-brand-secondary rounded-full shadow-lg hover:shadow-xl flex items-center justify-center text-slate-900 transition-all duration-300 z-50;
+}
+
+.fab:hover {
+    transform: translateY(-2px) scale(1.05);
+}
+
+/* Status Indicators */
+.status-online {
+    @apply inline-block w-3 h-3 bg-green-500 rounded-full animate-pulse;
+}
+
+.status-offline {
+    @apply inline-block w-3 h-3 bg-gray-400 rounded-full;
+}
+
+.status-away {
+    @apply inline-block w-3 h-3 bg-yellow-500 rounded-full;
+}
+
+/* Modern Navigation */
+.nav-item {
+    @apply flex items-center space-x-3 px-4 py-3 rounded-lg transition-all duration-200;
+}
+
+.nav-item:hover {
+    @apply bg-gray-100 dark:bg-slate-700 transform translate-x-1;
+}
+
+.nav-item.active {
+    @apply bg-brand-primary text-slate-900 font-medium;
+}
+
+.nav-item .nav-icon-container:hover {
+    transform: scale(1.1);
+}
+
+/* Responsive Design Utilities */
+@media (max-width: 768px) {
+    .glass {
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+    }
 }
