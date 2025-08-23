@@ -11,7 +11,7 @@
 <body>
     <header id="nav">
        <div class="nav--list">
-            <a href="{{route('lobby')}}">
+            <a href="{{route('home')}}">>
                 <h3 id="logo">
                     <span>ekiliConvo</span>
                 </h3>
