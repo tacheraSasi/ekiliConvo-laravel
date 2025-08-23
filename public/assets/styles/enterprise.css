@@ -1,0 +1,477 @@
+/* Enterprise Features CSS */
+
+/* File sharing styles */
+.file-share-content {
+    background: #f8f9fa;
+    border: 1px solid #dee2e6;
+    border-radius: 8px;
+    padding: 12px;
+    margin-top: 8px;
+}
+
+.file-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 8px;
+}
+
+.file-icon {
+    font-size: 24px;
+}
+
+.file-details {
+    flex: 1;
+}
+
+.file-name {
+    display: block;
+    font-weight: 500;
+    color: #333;
+    margin-bottom: 2px;
+}
+
+.file-size {
+    display: block;
+    font-size: 12px;
+    color: #666;
+}
+
+.file-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.download-btn, .preview-btn {
+    padding: 6px 12px;
+    border: 1px solid #007bff;
+    border-radius: 4px;
+    background: #007bff;
+    color: white;
+    text-decoration: none;
+    font-size: 12px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.download-btn:hover, .preview-btn:hover {
+    background: #0056b3;
+    border-color: #0056b3;
+}
+
+.preview-btn {
+    background: transparent;
+    color: #007bff;
+}
+
+.preview-btn:hover {
+    background: #007bff;
+    color: white;
+}
+
+.file-message .message__body {
+    border-left: 4px solid #007bff;
+    padding-left: 12px;
+}
+
+/* Host controls enhancement */
+.host-controls {
+    position: fixed;
+    top: 80px;
+    right: 20px;
+    background: white;
+    border-radius: 12px;
+    padding: 16px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+    border: 1px solid #e0e0e0;
+    z-index: 1000;
+    min-width: 280px;
+    max-height: 70vh;
+    overflow-y: auto;
+}
+
+.host-controls h4 {
+    margin: 0 0 16px 0;
+    font-size: 16px;
+    font-weight: 600;
+    color: #333;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 8px;
+}
+
+.control-buttons {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-bottom: 20px;
+}
+
+.control-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 10px 8px;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    background: white;
+    cursor: pointer;
+    font-size: 11px;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    text-align: center;
+}
+
+.control-btn:hover {
+    background: #f8f9fa;
+    border-color: #007bff;
+    transform: translateY(-1px);
+}
+
+.control-btn.active {
+    background: #007bff;
+    color: white;
+    border-color: #007bff;
+}
+
+.control-btn.recording {
+    background: #dc3545;
+    color: white;
+    border-color: #dc3545;
+    animation: pulse 1.5s infinite;
+}
+
+.control-btn svg {
+    width: 14px;
+    height: 14px;
+}
+
+/* Participants section */
+.participants-controls h5 {
+    margin: 0 0 12px 0;
+    font-size: 14px;
+    font-weight: 600;
+    color: #333;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#participant-count {
+    background: #007bff;
+    color: white;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: bold;
+}
+
+.participants-list {
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.participant-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.participant-item:last-child {
+    border-bottom: none;
+}
+
+.participant-info {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex: 1;
+}
+
+.participant-name {
+    font-weight: 500;
+    font-size: 12px;
+    color: #333;
+}
+
+.participant-role {
+    font-size: 9px;
+    color: #666;
+    background: #e9ecef;
+    padding: 2px 6px;
+    border-radius: 10px;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+.participant-role[data-role="host"] {
+    background: #ffeaa7;
+    color: #d63031;
+}
+
+.hand-raised {
+    font-size: 14px;
+    animation: wave 1s ease-in-out infinite;
+}
+
+.muted {
+    color: #dc3545;
+    font-size: 12px;
+}
+
+.participant-controls {
+    display: flex;
+    gap: 4px;
+}
+
+.control-btn.small {
+    padding: 4px 6px;
+    font-size: 10px;
+    min-width: 24px;
+    height: 24px;
+}
+
+/* Recording indicator */
+.recording-indicator {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(220, 53, 69, 0.95);
+    color: white;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(220, 53, 69, 0.3);
+}
+
+.recording-dot {
+    width: 8px;
+    height: 8px;
+    background: white;
+    border-radius: 50%;
+    animation: pulse 1s infinite;
+}
+
+/* Reactions panel */
+.reactions-panel {
+    position: fixed;
+    bottom: 100px;
+    right: 20px;
+    display: flex;
+    gap: 8px;
+    background: rgba(255, 255, 255, 0.95);
+    padding: 12px;
+    border-radius: 25px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.reaction-btn {
+    width: 40px;
+    height: 40px;
+    border: none;
+    border-radius: 50%;
+    background: transparent;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.reaction-btn:hover {
+    transform: scale(1.2);
+    background: rgba(0, 123, 255, 0.1);
+}
+
+/* Raise hand button enhancement */
+#raise-hand-btn {
+    position: relative;
+}
+
+#raise-hand-btn.active {
+    background: #ffc107;
+    color: #212529;
+    animation: handPulse 1s ease-in-out infinite;
+}
+
+/* Grid layout improvements */
+#streams__container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 16px;
+    padding: 16px;
+}
+
+.video__container {
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+    background: #000;
+}
+
+.video__container:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+}
+
+.video__container.speaking {
+    border: 3px solid #007bff;
+    box-shadow: 0 0 20px rgba(0, 123, 255, 0.3);
+}
+
+/* Connection quality indicator */
+.connection-quality {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    z-index: 10;
+}
+
+.connection-quality.excellent {
+    background: #28a745;
+}
+
+.connection-quality.good {
+    background: #ffc107;
+}
+
+.connection-quality.poor {
+    background: #dc3545;
+}
+
+/* Meeting timer */
+.meeting-timer {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-family: monospace;
+    font-size: 14px;
+    font-weight: bold;
+    z-index: 1000;
+}
+
+/* Toast notifications */
+.toast {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: #333;
+    color: white;
+    padding: 12px 20px;
+    border-radius: 6px;
+    z-index: 10000;
+    font-size: 14px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    max-width: 300px;
+}
+
+.toast.success {
+    background: #28a745;
+}
+
+.toast.error {
+    background: #dc3545;
+}
+
+.toast.warning {
+    background: #ffc107;
+    color: #212529;
+}
+
+/* Animations */
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
+
+@keyframes wave {
+    0%, 100% { transform: rotate(0deg); }
+    25% { transform: rotate(-10deg); }
+    75% { transform: rotate(10deg); }
+}
+
+@keyframes handPulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideOut {
+    from {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    to {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+}
+
+@keyframes reactionFloat {
+    0% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(-100px) scale(1.5);
+    }
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .host-controls {
+        position: fixed;
+        top: auto;
+        bottom: 0;
+        right: 0;
+        left: 0;
+        border-radius: 20px 20px 0 0;
+        max-height: 50vh;
+    }
+    
+    .reactions-panel {
+        bottom: 120px;
+        right: 10px;
+    }
+    
+    .control-buttons {
+        grid-template-columns: 1fr;
+    }
+    
+    #streams__container {
+        grid-template-columns: 1fr;
+        gap: 12px;
+        padding: 12px;
+    }
+}
