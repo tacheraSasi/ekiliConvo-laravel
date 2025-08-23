@@ -6,7 +6,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Hash;
 
 class Room extends Model
 {
@@ -17,11 +19,20 @@ class Room extends Model
         'creator_id',
         'uuid',
         'visibility',
-        'expires_at'
+        'expires_at',
+        'password',
+        'is_locked',
+        'recording_enabled',
+        'recording_in_progress',
+        'settings'
     ];
 
     protected $casts = [
         'expires_at' => 'datetime',
+        'is_locked' => 'boolean',
+        'recording_enabled' => 'boolean',
+        'recording_in_progress' => 'boolean',
+        'settings' => 'array'
     ];
 
     protected static function boot()
@@ -43,8 +54,18 @@ class Room extends Model
     public function users(): BelongsToMany
     {
         return $this->belongsToMany(User::class, 'room_users')
-                    ->withPivot('role_in_room', 'joined_at')
+                    ->withPivot('role_in_room', 'joined_at', 'is_muted', 'hand_raised', 'permissions')
                     ->withTimestamps();
+    }
+
+    public function recordings(): HasMany
+    {
+        return $this->hasMany(RoomRecording::class);
+    }
+
+    public function auditLogs(): HasMany
+    {
+        return $this->hasMany(RoomAuditLog::class);
     }
 
     public function isHost(User $user): bool
@@ -61,4 +82,88 @@ class Room extends Model
     {
         return $this->expires_at && $this->expires_at->isPast();
     }
+
+    public function isPasswordProtected(): bool
+    {
+        return !empty($this->password);
+    }
+
+    public function checkPassword(string $password): bool
+    {
+        return Hash::check($password, $this->password);
+    }
+
+    public function setPassword(string $password): void
+    {
+        $this->password = Hash::make($password);
+    }
+
+    public function canJoin(User $user = null): bool
+    {
+        if ($this->isExpired()) {
+            return false;
+        }
+
+        if ($this->is_locked && $user && !$this->isHost($user) && !$this->isParticipant($user)) {
+            return false;
+        }
+
+        return true;
+    }
+
+    public function isRecording(): bool
+    {
+        return $this->recording_in_progress;
+    }
+
+    public function hasRecordings(): bool
+    {
+        return $this->recordings()->exists();
+    }
+
+    public function getHostUser(): ?User
+    {
+        return $this->users()->wherePivot('role_in_room', 'host')->first();
+    }
+
+    public function getParticipantCount(): int
+    {
+        return $this->users()->count();
+    }
+
+    public function getRaisedHandsCount(): int
+    {
+        return $this->users()->wherePivot('hand_raised', true)->count();
+    }
+
+    public function getUserRole(User $user): ?string
+    {
+        $userInRoom = $this->users()->where('user_id', $user->id)->first();
+        return $userInRoom ? $userInRoom->pivot->role_in_room : null;
+    }
+
+    public function canUserPerformAction(User $user, string $action): bool
+    {
+        $role = $this->getUserRole($user);
+        
+        if (!$role) {
+            return false;
+        }
+
+        // Host can perform all actions
+        if ($role === 'host') {
+            return true;
+        }
+
+        // Define participant permissions
+        $participantPermissions = [
+            'join_stream',
+            'send_message',
+            'raise_hand',
+            'share_screen'
+        ];
+
+        return in_array($action, $participantPermissions);
+    }
+}
 }
