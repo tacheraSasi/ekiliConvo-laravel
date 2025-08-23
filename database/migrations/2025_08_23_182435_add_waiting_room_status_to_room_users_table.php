@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('room_users', function (Blueprint $table) {
-            //
+            $table->enum('status', ['waiting', 'admitted', 'rejected'])->default('admitted')->after('permissions');
         });
     }
 
@@ -22,7 +22,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('room_users', function (Blueprint $table) {
-            //
+            $table->dropColumn('status');
         });
     }
 };
