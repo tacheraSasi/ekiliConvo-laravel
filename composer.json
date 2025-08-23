@@ -10,7 +10,6 @@
         "laravel/socialite": "^5.16",
         "laravel/tinker": "^2.9",
         "league/commonmark": "^2.5",
-        "nativephp/electron": "^0.7.4",
         "tinymce/tinymce": "^7.3"
     },
     "require-dev": {
