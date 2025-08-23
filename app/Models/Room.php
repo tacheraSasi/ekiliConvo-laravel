@@ -24,6 +24,7 @@ class Room extends Model
         'is_locked',
         'recording_enabled',
         'recording_in_progress',
+        'waiting_room_enabled',
         'settings'
     ];
 
@@ -32,6 +33,7 @@ class Room extends Model
         'is_locked' => 'boolean',
         'recording_enabled' => 'boolean',
         'recording_in_progress' => 'boolean',
+        'waiting_room_enabled' => 'boolean',
         'settings' => 'array'
     ];
 
@@ -54,7 +56,7 @@ class Room extends Model
     public function users(): BelongsToMany
     {
         return $this->belongsToMany(User::class, 'room_users')
-                    ->withPivot('role_in_room', 'joined_at', 'is_muted', 'hand_raised', 'permissions')
+                    ->withPivot('role_in_room', 'joined_at', 'is_muted', 'hand_raised', 'permissions', 'status')
                     ->withTimestamps();
     }
 
@@ -165,5 +167,60 @@ class Room extends Model
 
         return in_array($action, $participantPermissions);
     }
-}
+
+    public function isWaitingRoomEnabled(): bool
+    {
+        return $this->waiting_room_enabled;
+    }
+
+    public function getWaitingParticipants()
+    {
+        return $this->users()->wherePivot('status', 'waiting')->get();
+    }
+
+    public function getAdmittedParticipants()
+    {
+        return $this->users()->wherePivot('status', 'admitted')->get();
+    }
+
+    public function getWaitingCount(): int
+    {
+        return $this->users()->wherePivot('status', 'waiting')->count();
+    }
+
+    public function admitParticipant(User $user): bool
+    {
+        $participant = $this->users()->where('user_id', $user->id)->first();
+        
+        if (!$participant || $participant->pivot->status !== 'waiting') {
+            return false;
+        }
+
+        $this->users()->updateExistingPivot($user->id, ['status' => 'admitted']);
+        return true;
+    }
+
+    public function rejectParticipant(User $user): bool
+    {
+        $participant = $this->users()->where('user_id', $user->id)->first();
+        
+        if (!$participant || $participant->pivot->status !== 'waiting') {
+            return false;
+        }
+
+        $this->users()->updateExistingPivot($user->id, ['status' => 'rejected']);
+        return true;
+    }
+
+    public function isParticipantWaiting(User $user): bool
+    {
+        $participant = $this->users()->where('user_id', $user->id)->first();
+        return $participant && $participant->pivot->status === 'waiting';
+    }
+
+    public function isParticipantAdmitted(User $user): bool
+    {
+        $participant = $this->users()->where('user_id', $user->id)->first();
+        return $participant && $participant->pivot->status === 'admitted';
+    }
 }

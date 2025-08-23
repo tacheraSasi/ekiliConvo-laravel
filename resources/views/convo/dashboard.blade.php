@@ -4,6 +4,7 @@
     <meta charset='utf-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
     <title>Dashboard | ekiliConvo</title>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <link rel='stylesheet' type='text/css' media='screen' href='{{asset("assets/styles/main.css")}}'>
     <link rel='stylesheet' type='text/css' media='screen' href='{{asset("assets/styles/room.css")}}'>
@@ -109,7 +110,7 @@
                 ekilie
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#ede0e0" viewBox="0 0 24 24"><path d="M20 7.093v-5.093h-3v2.093l3 3zm4 5.907l-12-12-12 12h3v10h7v-5h4v5h7v-10h3zm-5 8h-3v-5h-8v5h-3v-10.26l7-6.912 7 6.99v10.182z"/></svg>
             </a>
-            <a class="nav__link" href="{{route('lobby')}}">
+            <a class="nav__link" href="{{route('home')}}">>
                 Lobby
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#ede0e0" viewBox="0 0 24 24"><path d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm6 13h-5v5h-2v-5h-5v-2h5v-5h2v5h5v2z"/></svg>
             </a>
@@ -143,7 +144,7 @@
             <h2 style="color: #ede0e0; margin-bottom: 20px;">Create New Room</h2>
             <form method="POST" action="{{ route('rooms.store') }}">
                 @csrf
-                <div style="display: grid; grid-template-columns: 1fr 200px auto; gap: 15px; align-items: end;">
+                <div style="display: grid; grid-template-columns: 1fr 200px 150px auto; gap: 15px; align-items: end;">
                     <div class="form-group">
                         <label for="name">Room Name</label>
                         <input type="text" id="name" name="name" required placeholder="Enter room name">
@@ -153,6 +154,13 @@
                         <select id="visibility" name="visibility">
                             <option value="public">Public</option>
                             <option value="private">Private</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="waiting_room_enabled">Waiting Room</label>
+                        <select id="waiting_room_enabled" name="waiting_room_enabled">
+                            <option value="0">Disabled</option>
+                            <option value="1">Enabled</option>
                         </select>
                     </div>
                     <div class="form-group">
@@ -174,6 +182,7 @@
                                 <div>Created: {{ $room->created_at->format('M j, Y g:i A') }}</div>
                                 <div>Visibility: {{ ucfirst($room->visibility) }}</div>
                                 <div>Participants: {{ $room->users->count() }}</div>
+                                <div>Waiting Room: {{ $room->waiting_room_enabled ? 'Enabled' : 'Disabled' }}</div>
                                 @if($room->expires_at)
                                     <div>Expires: {{ $room->expires_at->format('M j, Y g:i A') }}</div>
                                 @endif

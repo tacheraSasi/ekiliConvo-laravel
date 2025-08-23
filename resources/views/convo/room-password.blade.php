@@ -13,7 +13,7 @@
 <body>
     <header id="nav">
         <div class="nav--list">
-            <a href="{{route('lobby')}}">
+            <a href="{{route('home')}}">>
                 <h3 id="logo">
                     <span>ekiliConvo</span>
                 </h3>
@@ -52,7 +52,7 @@
                 </form>
 
                 <div class="form__field__wrapper">
-                    <a href="{{ route('lobby') }}" class="secondary-link">← Back to Lobby</a>
+                    <a href="{{ route('home') }}" class="secondary-link">← Back to Lobby</a>
                 </div>
             </div>
         </div>
