@@ -2,6 +2,9 @@
 
 use App\Http\Controllers\Api\RoomControlController;
 use App\Http\Controllers\Api\RecordingController;
+use App\Http\Controllers\Api\AnalyticsController;
+use App\Http\Controllers\Api\RoomNotesController;
+use App\Http\Controllers\Api\SearchController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -37,10 +40,32 @@ Route::middleware(['auth'])->prefix('rooms/{roomUuid}')->group(function () {
     Route::post('/stop-recording', [RecordingController::class, 'stopRecording']);
     Route::get('/recordings', [RecordingController::class, 'getRoomRecordings']);
     Route::post('/toggle-recording-enabled', [RecordingController::class, 'toggleRecordingEnabled']);
+    
+    // Analytics endpoints
+    Route::get('/analytics', [AnalyticsController::class, 'getRoomAnalytics']);
+    Route::post('/analytics/record-session', [AnalyticsController::class, 'recordSessionData']);
+    
+    // Notes and collaboration endpoints
+    Route::get('/notes', [RoomNotesController::class, 'index']);
+    Route::post('/notes', [RoomNotesController::class, 'store']);
+    Route::put('/notes/{noteId}', [RoomNotesController::class, 'update']);
+    Route::delete('/notes/{noteId}', [RoomNotesController::class, 'destroy']);
+    Route::post('/notes/{noteId}/complete', [RoomNotesController::class, 'markCompleted']);
+    Route::post('/notes/{noteId}/pin', [RoomNotesController::class, 'togglePin']);
+    Route::get('/notes/summary', [RoomNotesController::class, 'summary']);
 });
 
 // Recording playback and management
 Route::middleware(['auth'])->group(function () {
     Route::get('/recordings/{recordingId}/play', [RecordingController::class, 'playRecording']);
     Route::delete('/recordings/{recordingId}', [RecordingController::class, 'deleteRecording']);
+    
+    // Analytics endpoints
+    Route::get('/analytics/platform', [AnalyticsController::class, 'getPlatformAnalytics']);
+    Route::get('/analytics/user', [AnalyticsController::class, 'getUserAnalytics']);
+    
+    // Search endpoints
+    Route::get('/search', [SearchController::class, 'search']);
+    Route::get('/search/suggestions', [SearchController::class, 'suggestions']);
+    Route::get('/search/filters', [SearchController::class, 'filters']);
 });
