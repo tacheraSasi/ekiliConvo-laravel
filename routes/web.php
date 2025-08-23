@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     if(Auth::check()){
-       return redirect(route("home"));
+       return redirect(route("dashboard"));
     }
     // $insights = Insight::with('category', 'user', 'likes', 'comments')->latest()->paginate(6);
     return view('welcome');
@@ -22,7 +22,7 @@ Route::get('/', function () {
 // });
 
 Route::get('/dashboard', function () {
-    return redirect(route("home"));
+    return redirect(route("dashboard"));
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 
@@ -37,14 +37,16 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    Route::get("/lobby", [RoomController::class,"index"])->name("home");
-    Route::post("/lobby", [RoomController::class,"create"])->name("create-room-post");
-
-    Route::get("/room/{name}", function($name){
-        $room = $name;
-        return view('convo.room',["room"=>$room]);
-    })->name('room');
+    Route::get("/lobby", [RoomController::class,"index"])->name("lobby");
+    Route::get("/dashboard", [RoomController::class,"dashboard"])->name("dashboard");
+    Route::post("/rooms", [RoomController::class,"store"])->name("rooms.store");
+    Route::delete("/rooms/{uuid}", [RoomController::class,"destroy"])->name("rooms.destroy");
 });
+
+// Public routes for room access (guests can join)
+Route::get("/lobby", [RoomController::class,"index"])->name("home");
+Route::get("/room/{uuid}", [RoomController::class,"show"])->name('room');
+Route::get("/join/{uuid}", [RoomController::class,"join"])->name('join-room');
 
 // require __DIR__.'/insights.php';
 require __DIR__.'/auth.php';
