@@ -95,6 +95,7 @@
     //configs
     const APP_ID = "{{env('AGORA_APP_ID')}}"
     const ROOM_UUID = "{{$roomUuid ?? ''}}"
+    const IS_HOST = {{$isHost ? 'true' : 'false'}}
 </script>
 <script type="text/javascript" src="{{asset('assets/js/AgoraRTC_N-4.11.0.js')}}"></script>
 <script type="text/javascript" src="{{asset('assets/js/agora-rtm-sdk-1.4.4.js')}}"></script>
