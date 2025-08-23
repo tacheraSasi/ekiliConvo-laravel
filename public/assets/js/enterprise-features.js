@@ -78,6 +78,11 @@ function initializeEnterpriseFeatures() {
     
     // Set up periodic participant updates
     setInterval(loadRoomParticipants, 10000); // Update every 10 seconds
+    
+    // Set up periodic waiting room updates for hosts
+    if (isHost) {
+        setInterval(loadWaitingParticipants, 5000); // Check waiting room every 5 seconds
+    }
 }
 
 /**
@@ -109,12 +114,24 @@ function addHostControlPanel() {
                         </svg>
                         <span>Settings</span>
                     </button>
+                    
+                    <button id="toggle-waiting-room-btn" class="control-btn">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                        </svg>
+                        <span id="waiting-room-status">Enable Waiting Room</span>
+                    </button>
                 </div>
             </div>
             
             <div class="participants-controls">
                 <h5>Participants <span id="participant-count">0</span></h5>
                 <div id="participants-list" class="participants-list"></div>
+            </div>
+            
+            <div id="waiting-room-section" class="waiting-room-section" style="display: none;">
+                <h5>Waiting Room <span id="waiting-count">0</span></h5>
+                <div id="waiting-participants-list" class="waiting-participants-list"></div>
             </div>
         </div>
     `;
@@ -206,6 +223,9 @@ function setupHostControlListeners() {
     
     // Room settings
     document.getElementById('room-settings-btn')?.addEventListener('click', showRoomSettings);
+    
+    // Waiting room controls
+    document.getElementById('toggle-waiting-room-btn')?.addEventListener('click', toggleWaitingRoom);
 }
 
 /**
@@ -309,6 +329,85 @@ function updateRoomStatus(data) {
         }
         recordingBtn.classList.toggle('recording', recordingInProgress);
     }
+    
+    // Update waiting room status if data includes it
+    if (data.waiting_room_enabled !== undefined) {
+        updateWaitingRoomStatus(data.waiting_room_enabled);
+    }
+    
+    // Update waiting room count if data includes it
+    if (data.waiting_count !== undefined) {
+        const waitingCount = document.getElementById('waiting-count');
+        if (waitingCount) {
+            waitingCount.textContent = data.waiting_count;
+        }
+        
+        // Show/hide waiting room section based on count and status
+        const waitingSection = document.getElementById('waiting-room-section');
+        if (waitingSection && data.waiting_room_enabled) {
+            waitingSection.style.display = data.waiting_count > 0 ? 'block' : 'none';
+        }
+    }
+}
+
+/**
+ * Update waiting room status display
+ */
+function updateWaitingRoomStatus(waitingRoomEnabled) {
+    const waitingRoomBtn = document.getElementById('toggle-waiting-room-btn');
+    const waitingRoomStatus = document.getElementById('waiting-room-status');
+    const waitingSection = document.getElementById('waiting-room-section');
+    
+    if (waitingRoomBtn && waitingRoomStatus) {
+        waitingRoomStatus.textContent = waitingRoomEnabled ? 'Disable Waiting Room' : 'Enable Waiting Room';
+        waitingRoomBtn.classList.toggle('active', waitingRoomEnabled);
+    }
+    
+    if (waitingSection) {
+        if (waitingRoomEnabled) {
+            waitingSection.style.display = 'block';
+            loadWaitingParticipants();
+        } else {
+            waitingSection.style.display = 'none';
+        }
+    }
+}
+
+/**
+ * Update waiting participants display
+ */
+function updateWaitingParticipantsDisplay(data) {
+    const waitingList = document.getElementById('waiting-participants-list');
+    const waitingCount = document.getElementById('waiting-count');
+    
+    if (!waitingList || !waitingCount) return;
+    
+    waitingCount.textContent = data.count;
+    
+    if (data.count === 0) {
+        waitingList.innerHTML = '<div class="no-waiting">No participants waiting</div>';
+        return;
+    }
+    
+    waitingList.innerHTML = data.waiting_participants.map(participant => `
+        <div class="waiting-participant-item" data-user-id="${participant.id}">
+            <div class="participant-info">
+                <span class="participant-name">${participant.name}</span>
+                <span class="waiting-time">Waiting since ${new Date(participant.joined_at).toLocaleTimeString()}</span>
+            </div>
+            <div class="waiting-controls">
+                <button class="control-btn small admit-btn" onclick="admitParticipant(${participant.id})" 
+                        title="Admit to meeting">
+                    ✅ Admit
+                </button>
+                <button class="control-btn small reject-btn" onclick="rejectParticipant(${participant.id})" 
+                        title="Deny entry">
+                    ❌ Deny
+                </button>
+            </div>
+        </div>
+    `).join('');
+}
 }
 
 /**
@@ -511,6 +610,118 @@ async function toggleRecording() {
         }
     } catch (error) {
         console.error('Failed to toggle recording:', error);
+    }
+}
+
+/**
+ * Toggle waiting room (host only)
+ */
+async function toggleWaitingRoom() {
+    if (!isHost) return;
+    
+    try {
+        const response = await fetch(`/api/rooms/${ROOM_UUID}/toggle-waiting-room`, {
+            method: 'POST',
+            headers: {
+                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')?.getAttribute('content') || '',
+                'Content-Type': 'application/json'
+            }
+        });
+        
+        if (response.ok) {
+            const data = await response.json();
+            
+            // Update UI
+            updateWaitingRoomStatus(data.waiting_room_enabled);
+            
+            // Show toast message
+            showToast(data.message);
+            
+            // Reload participants to update waiting room section
+            loadRoomParticipants();
+        }
+    } catch (error) {
+        console.error('Failed to toggle waiting room:', error);
+    }
+}
+
+/**
+ * Load waiting room participants
+ */
+async function loadWaitingParticipants() {
+    if (!isHost) return;
+    
+    try {
+        const response = await fetch(`/api/rooms/${ROOM_UUID}/waiting-participants`, {
+            headers: {
+                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')?.getAttribute('content') || '',
+                'Content-Type': 'application/json'
+            }
+        });
+        
+        if (response.ok) {
+            const data = await response.json();
+            updateWaitingParticipantsDisplay(data);
+        }
+    } catch (error) {
+        console.error('Failed to load waiting participants:', error);
+    }
+}
+
+/**
+ * Admit participant from waiting room
+ */
+async function admitParticipant(userId) {
+    if (!isHost) return;
+    
+    try {
+        const response = await fetch(`/api/rooms/${ROOM_UUID}/admit-participant`, {
+            method: 'POST',
+            headers: {
+                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')?.getAttribute('content') || '',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ user_id: userId })
+        });
+        
+        if (response.ok) {
+            const data = await response.json();
+            showToast(data.message);
+            
+            // Reload participants and waiting room
+            loadRoomParticipants();
+            loadWaitingParticipants();
+        }
+    } catch (error) {
+        console.error('Failed to admit participant:', error);
+    }
+}
+
+/**
+ * Reject participant from waiting room
+ */
+async function rejectParticipant(userId) {
+    if (!isHost) return;
+    
+    try {
+        const response = await fetch(`/api/rooms/${ROOM_UUID}/reject-participant`, {
+            method: 'POST',
+            headers: {
+                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')?.getAttribute('content') || '',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ user_id: userId })
+        });
+        
+        if (response.ok) {
+            const data = await response.json();
+            showToast(data.message);
+            
+            // Reload waiting room
+            loadWaitingParticipants();
+        }
+    } catch (error) {
+        console.error('Failed to reject participant:', error);
     }
 }
 
