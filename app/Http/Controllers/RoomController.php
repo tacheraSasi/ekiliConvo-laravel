@@ -50,12 +50,14 @@ class RoomController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'visibility' => 'required|in:public,private',
+            'waiting_room_enabled' => 'boolean',
         ]);
 
         $room = Room::create([
             'name' => $request->name,
             'creator_id' => Auth::id(),
             'visibility' => $request->visibility,
+            'waiting_room_enabled' => $request->boolean('waiting_room_enabled'),
             'uuid' => Str::uuid(),
         ]);
 
@@ -63,6 +65,7 @@ class RoomController extends Controller
         $room->users()->attach(Auth::id(), [
             'role_in_room' => 'host',
             'joined_at' => now(),
+            'status' => 'admitted', // Host is always admitted
         ]);
 
         return redirect()->route('room', $room->uuid);
@@ -77,7 +80,7 @@ class RoomController extends Controller
         
         // Check if room is expired
         if ($room->isExpired()) {
-            return redirect()->route('lobby')->with('error', 'This room has expired.');
+            return redirect()->route('home')->with('error', 'This room has expired.');
         }
 
         // Check if room requires password
@@ -99,21 +102,40 @@ class RoomController extends Controller
         if (Auth::check()) {
             $user = Auth::user();
             if (!$room->canJoin($user)) {
-                return redirect()->route('lobby')->with('error', 'This room is locked and you cannot join.');
+                return redirect()->route('home')->with('error', 'This room is locked and you cannot join.');
             }
         } else {
             // For guests, check if room is locked
             if ($room->is_locked) {
-                return redirect()->route('lobby')->with('error', 'This room is locked to new participants.');
+                return redirect()->route('home')->with('error', 'This room is locked to new participants.');
             }
         }
 
-        // Add current user as participant if not already in the room
+        // If user is already in the room but waiting, show waiting room
+        if (Auth::check() && $room->isParticipantWaiting(Auth::user())) {
+            return view('convo.waiting-room', [
+                'room' => $room->name,
+                'roomUuid' => $room->uuid,
+                'roomModel' => $room,
+            ]);
+        }
         if (Auth::check() && !$room->isParticipant(Auth::user()) && !$room->isHost(Auth::user())) {
+            $status = $room->isWaitingRoomEnabled() ? 'waiting' : 'admitted';
+            
             $room->users()->attach(Auth::id(), [
                 'role_in_room' => 'participant',
                 'joined_at' => now(),
+                'status' => $status,
             ]);
+            
+            // If waiting room is enabled and user is not host, show waiting room
+            if ($room->isWaitingRoomEnabled() && $status === 'waiting') {
+                return view('convo.waiting-room', [
+                    'room' => $room->name,
+                    'roomUuid' => $room->uuid,
+                    'roomModel' => $room,
+                ]);
+            }
         }
 
         return view('convo.room', [
@@ -155,13 +177,13 @@ class RoomController extends Controller
         $room = Room::where('uuid', $uuid)->firstOrFail();
         
         if ($room->isExpired()) {
-            return redirect()->route('lobby')->with('error', 'This room has expired.');
+            return redirect()->route('home')->with('error', 'This room has expired.');
         }
 
         if (!Auth::check()) {
             // For guests, redirect to lobby with room UUID
             session(['joining_room' => $uuid]);
-            return redirect()->route('lobby')->with('info', 'Please enter your name to join the room.');
+            return redirect()->route('home')->with('info', 'Please enter your name to join the room.');
         }
 
         return redirect()->route('room', $uuid);
