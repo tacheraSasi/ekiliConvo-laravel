@@ -10,6 +10,7 @@
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <link rel='stylesheet' type='text/css' media='screen' href='{{asset("assets/styles/main.css")}}'>
     <link rel='stylesheet' type='text/css' media='screen' href='{{asset("assets/styles/room.css")}}'>
+    <link rel='stylesheet' type='text/css' media='screen' href='{{asset("assets/styles/enterprise.css")}}'>
 </head>
 <body>
 

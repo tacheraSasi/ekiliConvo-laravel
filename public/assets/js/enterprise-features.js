@@ -3,6 +3,8 @@ let isHost = false;
 let roomLocked = false;
 let recordingInProgress = false;
 let handRaised = false;
+let meetingStartTime = null;
+let meetingTimer = null;
 
 // Initialize enterprise features when room is loaded
 document.addEventListener('DOMContentLoaded', function() {
@@ -10,7 +12,53 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Check if current user is host and load host controls
     loadRoomParticipants();
+    
+    // Start meeting timer
+    startMeetingTimer();
 });
+
+/**
+ * Start meeting timer
+ */
+function startMeetingTimer() {
+    meetingStartTime = new Date();
+    
+    // Add timer to UI
+    const timerElement = document.createElement('div');
+    timerElement.id = 'meeting-timer';
+    timerElement.className = 'meeting-timer';
+    timerElement.textContent = '00:00:00';
+    
+    // Insert after nav
+    const nav = document.getElementById('nav');
+    if (nav) {
+        nav.insertAdjacentElement('afterend', timerElement);
+    }
+    
+    // Update timer every second
+    meetingTimer = setInterval(updateMeetingTimer, 1000);
+}
+
+/**
+ * Update meeting timer display
+ */
+function updateMeetingTimer() {
+    if (!meetingStartTime) return;
+    
+    const now = new Date();
+    const elapsed = Math.floor((now - meetingStartTime) / 1000);
+    
+    const hours = Math.floor(elapsed / 3600);
+    const minutes = Math.floor((elapsed % 3600) / 60);
+    const seconds = elapsed % 60;
+    
+    const timeString = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+    
+    const timerElement = document.getElementById('meeting-timer');
+    if (timerElement) {
+        timerElement.textContent = timeString;
+    }
+}
 
 /**
  * Initialize enterprise features UI and event listeners
