@@ -475,3 +475,102 @@
         padding: 12px;
     }
 }
+
+/* Waiting Room Styles */
+.waiting-room-section {
+    border-top: 1px solid #444;
+    padding-top: 15px;
+    margin-top: 15px;
+}
+
+.waiting-room-section h5 {
+    color: #ffc107;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.waiting-room-section h5::before {
+    content: "⏳";
+    font-size: 16px;
+}
+
+.waiting-participants-list {
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.waiting-participant-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 12px;
+    background: rgba(255, 193, 7, 0.1);
+    border: 1px solid rgba(255, 193, 7, 0.3);
+    border-radius: 6px;
+    margin-bottom: 8px;
+}
+
+.waiting-participant-item .participant-info {
+    flex: 1;
+}
+
+.waiting-participant-item .participant-name {
+    display: block;
+    color: #ffc107;
+    font-weight: 500;
+    margin-bottom: 2px;
+}
+
+.waiting-participant-item .waiting-time {
+    display: block;
+    color: #bbb;
+    font-size: 12px;
+}
+
+.waiting-controls {
+    display: flex;
+    gap: 6px;
+}
+
+.admit-btn {
+    background: #28a745 !important;
+    border-color: #28a745 !important;
+    color: white !important;
+    padding: 4px 8px !important;
+    font-size: 12px !important;
+}
+
+.admit-btn:hover {
+    background: #218838 !important;
+}
+
+.reject-btn {
+    background: #dc3545 !important;
+    border-color: #dc3545 !important;
+    color: white !important;
+    padding: 4px 8px !important;
+    font-size: 12px !important;
+}
+
+.reject-btn:hover {
+    background: #c82333 !important;
+}
+
+.no-waiting {
+    text-align: center;
+    color: #888;
+    font-style: italic;
+    padding: 20px;
+}
+
+#toggle-waiting-room-btn.active {
+    background: #ffc107;
+    border-color: #ffc107;
+    color: #212529;
+}
+
+#toggle-waiting-room-btn.active svg {
+    fill: #212529;
+}
