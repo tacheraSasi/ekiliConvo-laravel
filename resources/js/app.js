@@ -1,5 +1,6 @@
 import { document } from 'postcss';
 import './bootstrap';
+import './theme';
 // import {MarkdownBlock, MarkdownSpan, MarkdownElement} from "md-block";
 // import {URLs as MdBlockURLS, MarkdownBlock, MarkdownSpan, MarkdownElement} from "md-block.js";
 
