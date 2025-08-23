@@ -46,6 +46,7 @@ Route::middleware('auth')->group(function () {
 // Public routes for room access (guests can join)
 Route::get("/lobby", [RoomController::class,"index"])->name("home");
 Route::get("/room/{uuid}", [RoomController::class,"show"])->name('room');
+Route::post("/room/{uuid}/validate-password", [RoomController::class,"validatePassword"])->name('room.validate-password');
 Route::get("/join/{uuid}", [RoomController::class,"join"])->name('join-room');
 
 // require __DIR__.'/insights.php';
