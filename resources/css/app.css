@@ -193,3 +193,93 @@ body {
         -webkit-backdrop-filter: blur(8px);
     }
 }
+
+/* Room-specific avatar styles */
+.avatar-md {
+    @apply h-10 w-10 object-cover rounded-full;
+}
+
+.avatar-sm {
+    @apply h-8 w-8 object-cover rounded-full;
+}
+
+/* Member wrapper for room participants */
+.member-wrapper {
+    @apply flex items-center gap-3 pl-4 py-2 hover:bg-slate-700/50 rounded-lg transition-colors duration-200;
+}
+
+.member-name {
+    @apply text-sm text-white font-medium;
+}
+
+.green-icon {
+    @apply block h-2 w-2 rounded-full bg-green-400;
+}
+
+/* Video container styles */
+.video-container {
+    @apply h-48 w-48 rounded-lg overflow-hidden bg-slate-700 border border-slate-600;
+}
+
+/* Responsive adjustments for mobile - room specific */
+@media (max-width: 1200px) {
+    #members__container {
+        display: none;
+    }
+    
+    #members__button {
+        display: block !important;
+    }
+    
+    #stream__container {
+        margin-left: 0 !important;
+        width: calc(100% - 25rem) !important;
+    }
+}
+
+@media (max-width: 980px) {
+    #stream__container {
+        width: calc(100% - 20rem) !important;
+    }
+    
+    #messages__container {
+        max-width: 20rem !important;
+    }
+}
+
+@media (max-width: 768px) {
+    #stream__container {
+        width: 100% !important;
+        margin-left: 0 !important;
+    }
+    
+    .video-container {
+        @apply h-24 w-24;
+    }
+    
+    #messages__container {
+        display: none !important;
+    }
+    
+    #chat__button {
+        display: block !important;
+    }
+    
+    #create__room__btn span {
+        display: none;
+    }
+    
+    #create__room__btn {
+        @apply px-3 py-2 bg-transparent rounded-full;
+    }
+    
+    #create__room__btn:hover {
+        @apply bg-transparent;
+    }
+}
+
+@media (max-width: 640px) {
+    #members__button {
+        display: block !important;
+    }
+}
