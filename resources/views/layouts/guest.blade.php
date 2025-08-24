@@ -14,7 +14,7 @@
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
-    <body class="font-sans text-gray-900 antialiased">
+    <body class="font-sans text-neutral-900 antialiased">
         <!-- Modern gradient background with animated particles -->
         <div class="min-h-screen relative overflow-hidden bg-gradient-to-br from-slate-900 via-brand-darker to-slate-800">
             <!-- Animated background elements -->

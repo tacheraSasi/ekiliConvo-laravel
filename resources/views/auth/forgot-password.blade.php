@@ -2,8 +2,8 @@
     <div class="space-y-6">
         <!-- Header -->
         <div class="text-center">
-            <h2 class="text-2xl font-bold text-gray-900 dark:text-white">Reset Password</h2>
-            <p class="mt-2 text-sm text-gray-600 dark:text-gray-400">We'll send you a link to reset your password</p>
+            <h2 class="text-2xl font-bold text-neutral-900 dark:text-white">Reset Password</h2>
+            <p class="mt-2 text-sm text-neutral-600 dark:text-neutral-400">We'll send you a link to reset your password</p>
         </div>
 
         <!-- Info Message -->
@@ -30,19 +30,19 @@
 
             <!-- Email Address -->
             <div class="space-y-2">
-                <x-input-label for="email" :value="__('Email Address')" class="text-gray-700 dark:text-gray-300 font-medium" />
+                <x-input-label for="email" :value="__('Email Address')" class="text-neutral-700 dark:text-neutral-300 font-medium" />
                 <div class="relative">
                     <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                        <svg class="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg class="h-5 w-5 text-neutral-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207" />
                         </svg>
                     </div>
-                    <x-text-input id="email" 
-                        class="form-input pl-10 w-full" 
-                        type="email" 
-                        name="email" 
-                        :value="old('email')" 
-                        required 
+                    <x-text-input id="email"
+                        class="form-input pl-10 w-full"
+                        type="email"
+                        name="email"
+                        :value="old('email')"
+                        required
                         autofocus
                         placeholder="Enter your email address" />
                 </div>
@@ -60,7 +60,7 @@
 
                 <!-- Back to Login -->
                 <div class="text-center">
-                    <p class="text-sm text-gray-600 dark:text-gray-400">
+                    <p class="text-sm text-neutral-600 dark:text-neutral-400">
                         Remember your password?
                         <a href="{{ route('login') }}" class="font-medium text-brand-secondary hover:text-brand-primary transition-colors duration-200">
                             Back to login

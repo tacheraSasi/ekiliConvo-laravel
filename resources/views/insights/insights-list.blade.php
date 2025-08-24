@@ -24,7 +24,7 @@
                                   {{ $insight->title }}
                               </a>
                           </h3>
-                          <div class="mt-3 line-clamp-3 h-[250px] overflow-hidden text-sm leading-6 text-gray-600 dark:text-neutral-400">
+                          <div class="mt-3 line-clamp-3 h-[250px] overflow-hidden text-sm leading-6 text-neutral-600 dark:text-neutral-400">
                               {!! Str::limit($insight->content, 300) !!}
                           </div>
                       </div>
