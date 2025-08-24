@@ -15,6 +15,12 @@
     --color-glass-bg: rgba(255, 255, 255, 0.25);
     --color-glass-border: rgba(255, 255, 255, 0.18);
     --shadow-glass: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    
+    /* Brand colors */
+    --color-brand-primary: #74f5a1;
+    --color-brand-secondary: #428d5c;
+    --color-brand-accent: #5ccf87;
+    --color-brand-dark: #1e4b32;
 }
 
 .dark {
@@ -29,6 +35,12 @@
     --color-glass-bg: rgba(0, 0, 0, 0.25);
     --color-glass-border: rgba(255, 255, 255, 0.08);
     --shadow-glass: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
+    
+    /* Brand colors for dark mode */
+    --color-brand-primary: #74f5a1;
+    --color-brand-secondary: #428d5c;
+    --color-brand-accent: #5ccf87;
+    --color-brand-dark: #1e4b32;
 }
 
 /* Global Styles */
@@ -84,7 +96,7 @@ body {
 }
 
 .btn-primary {
-    @apply btn-modern bg-brand-primary hover:bg-brand-secondary text-slate-900 focus:ring-brand-primary;
+    @apply btn-modern bg-brand-secondary hover:bg-brand-dark text-white focus:ring-brand-primary;
 }
 
 .btn-secondary {
@@ -167,7 +179,7 @@ body {
 }
 
 .nav-item.active {
-    @apply bg-brand-primary text-slate-900 font-medium;
+    @apply bg-brand-primary text-brand-darker font-medium;
 }
 
 .nav-item .nav-icon-container:hover {

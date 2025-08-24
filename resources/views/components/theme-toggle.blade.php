@@ -2,7 +2,7 @@
 <div class="theme-toggle-wrapper">
     <button 
         data-theme-toggle
-        class="theme-toggle p-2 rounded-lg bg-gray-200 dark:bg-slate-700 hover:bg-gray-300 dark:hover:bg-slate-600 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-brand-primary"
+        class="theme-toggle p-2 rounded-lg bg-gray-200 dark:bg-slate-700 hover:bg-gray-300 dark:hover:bg-slate-600 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-brand-primary focus:ring-offset-2 dark:focus:ring-offset-slate-800"
         title="Toggle theme (Ctrl+Shift+T)"
         aria-label="Toggle between light and dark theme"
     >

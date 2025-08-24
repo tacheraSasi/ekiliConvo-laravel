@@ -31,11 +31,14 @@ export default {
                     900: '#14532d',
                     950: '#052e16',
                 },
-                // Custom brand colors
+                // Custom brand colors with dark green theme
                 brand: {
-                    primary: '#74f5a1',
-                    secondary: '#428d5c',
-                    accent: '#5ccf87',
+                    primary: '#74f5a1',    // Light green for primary actions
+                    secondary: '#428d5c',  // Medium green for secondary elements
+                    accent: '#5ccf87',     // Bright green for accents
+                    dark: '#1e4b32',       // Dark green for dark mode primary
+                    darker: '#0f2419',     // Darker green for dark mode secondary
+                    light: '#a7f3d0',      // Light green for highlights
                 },
                 // Semantic colors
                 success: '#10b981',

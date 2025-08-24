@@ -85,7 +85,7 @@
         <div class="mt-6 flex items-center space-x-4 dark:text-neutral-200">
             <form action="{{ route('insights.like', $insight->id) }}" method="POST" class="flex items-center">
                 @csrf
-                <button type="submit" class="flex items-center text-customGreenDark dark:text-customGreenLight hover:text-green-300 dark:hover:text-green-300 transition duration-300">
+                <button type="submit" class="flex items-center text-brand-secondary dark:text-brand-primary hover:text-brand-accent dark:hover:text-brand-light transition duration-300">
                     <svg class="w-6 h-6 inline mr-2" fill="currentColor" viewBox="0 0 24 24">
                         <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 6.5 3.5 5 5.5 5c1.54 0 3.04.99 3.57 2.36h1.87C13.46 5.99 14.96 5 16.5 5 18.5 5 20 6.5 20 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"></path>
                     </svg>
@@ -118,7 +118,7 @@
                         <textarea name="comment" rows="4" class="w-full p-4 rounded-lg border dark:bg-neutral-900 text-black dark:text-white dark:border-neutral-700 focus:outline-none focus:ring focus:ring-neutral-500 dark:focus:ring-neutral-400 placeholder-neutral-500 dark:placeholder-neutral-400" placeholder="Write a comment..." required></textarea>
                     </div>
                     <div class="mt-4">
-                        <x-primary-button type="submit" class="bg-customGreenDark dark:bg-customGreenLight text-white px-5 py-2 rounded-md border-none  hover:bg-neutral-700 dark:hover:bg-neutral-400 transition duration-300">
+                        <x-primary-button type="submit" class="bg-brand-secondary dark:bg-brand-primary text-white px-5 py-2 rounded-md border-none hover:bg-brand-dark dark:hover:bg-brand-light transition duration-300">
                             Add Comment
                         </x-primary-button>
                     </div>
