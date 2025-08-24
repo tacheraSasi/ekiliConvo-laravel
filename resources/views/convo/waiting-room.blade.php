@@ -1,155 +1,30 @@
 @extends('layouts.app')
 
 @section('content')
-<style>
-    body {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        min-height: 100vh;
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    }
-
-    .waiting-room-container {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        min-height: 100vh;
-        padding: 20px;
-    }
-
-    .waiting-room-card {
-        background: white;
-        border-radius: 20px;
-        padding: 40px;
-        text-align: center;
-        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-        max-width: 500px;
-        width: 100%;
-    }
-
-    .waiting-icon {
-        font-size: 4rem;
-        margin-bottom: 20px;
-        animation: pulse 2s infinite;
-    }
-
-    @keyframes pulse {
-        0% { transform: scale(1); }
-        50% { transform: scale(1.1); }
-        100% { transform: scale(1); }
-    }
-
-    .waiting-title {
-        font-size: 2rem;
-        color: #333;
-        margin-bottom: 15px;
-        font-weight: 600;
-    }
-
-    .waiting-message {
-        color: #666;
-        font-size: 1.1rem;
-        margin-bottom: 30px;
-        line-height: 1.6;
-    }
-
-    .room-info {
-        background: #f8f9fa;
-        border-radius: 10px;
-        padding: 20px;
-        margin-bottom: 30px;
-    }
-
-    .room-name {
-        font-size: 1.3rem;
-        font-weight: 600;
-        color: #667eea;
-        margin-bottom: 10px;
-    }
-
-    .participant-count {
-        color: #888;
-        font-size: 0.9rem;
-    }
-
-    .waiting-actions {
-        display: flex;
-        gap: 15px;
-        justify-content: center;
-        flex-wrap: wrap;
-    }
-
-    .btn {
-        padding: 12px 24px;
-        border-radius: 8px;
-        border: none;
-        font-weight: 600;
-        text-decoration: none;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        font-size: 1rem;
-    }
-
-    .btn-secondary {
-        background: #6c757d;
-        color: white;
-    }
-
-    .btn-secondary:hover {
-        background: #5a6268;
-        transform: translateY(-2px);
-    }
-
-    .status-indicator {
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-        padding: 8px 16px;
-        background: #fff3cd;
-        border: 1px solid #ffeaa7;
-        border-radius: 20px;
-        color: #856404;
-        font-weight: 500;
-        margin-bottom: 20px;
-    }
-
-    .status-dot {
-        width: 8px;
-        height: 8px;
-        background: #ffa500;
-        border-radius: 50%;
-        animation: blink 1.5s infinite;
-    }
-
-    @keyframes blink {
-        0%, 50% { opacity: 1; }
-        51%, 100% { opacity: 0.3; }
-    }
-</style>
-
-<div class="waiting-room-container">
-    <div class="waiting-room-card">
-        <div class="waiting-icon">⏳</div>
+<div class="min-h-screen bg-gradient-to-br from-blue-600 to-purple-700 flex items-center justify-center p-5">
+    <div class="bg-white rounded-3xl p-10 text-center shadow-2xl max-w-lg w-full">
+        <div class="text-6xl mb-5 animate-pulse">⏳</div>
         
-        <h1 class="waiting-title">You're in the Waiting Room</h1>
+        <h1 class="text-3xl text-gray-800 mb-4 font-semibold">You're in the Waiting Room</h1>
         
-        <div class="status-indicator">
-            <span class="status-dot"></span>
+        <div class="inline-flex items-center gap-2 px-4 py-2 bg-yellow-100 border border-yellow-300 rounded-full text-yellow-800 font-medium mb-5">
+            <span class="w-2 h-2 bg-orange-500 rounded-full animate-pulse"></span>
             Waiting for host approval
         </div>
         
-        <p class="waiting-message">
+        <p class="text-gray-600 text-lg mb-8 leading-relaxed">
             The host will admit you to the meeting shortly. Please wait while we notify them of your arrival.
         </p>
         
-        <div class="room-info">
-            <div class="room-name">{{ $room }}</div>
-            <div class="participant-count" id="participant-count">
+        <div class="bg-gray-50 rounded-xl p-5 mb-8">
+            <div class="text-xl font-semibold text-blue-600 mb-2">{{ $room }}</div>
+            <div class="text-gray-500 text-sm" id="participant-count">
                 Checking participant count...
             </div>
         </div>
         
-        <div class="waiting-actions">
-            <a href="{{ route('home') }}" class="btn btn-secondary">
+        <div class="flex gap-4 justify-center flex-wrap">
+            <a href="{{ route('home') }}" class="px-6 py-3 bg-gray-600 hover:bg-gray-700 text-white font-semibold rounded-lg transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
                 Leave Waiting Room
             </a>
         </div>
