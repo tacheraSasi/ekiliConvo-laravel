@@ -13,11 +13,10 @@ Route::get('/', function () {
     if(Auth::check()){
        return redirect(route("dashboard"));
     }
-    // $insights = Insight::with('category', 'user', 'likes', 'comments')->latest()->paginate(6);
     return view('welcome');
 });
 
-//ui testing route 
+//ui testing route
 // Route::get("/ui",function (){
 //     return view("ui");
 // });
@@ -42,7 +41,7 @@ Route::middleware('auth')->group(function () {
     Route::get("/dashboard", [RoomController::class,"dashboard"])->name("dashboard");
     Route::post("/rooms", [RoomController::class,"store"])->name("rooms.store");
     Route::delete("/rooms/{uuid}", [RoomController::class,"destroy"])->name("rooms.destroy");
-    
+
     // Analytics routes
     Route::get('/analytics', [AnalyticsDashboardController::class, 'index'])->name('analytics.dashboard');
     Route::get('/analytics/room/{roomUuid}', [AnalyticsDashboardController::class, 'room'])->name('analytics.room');
