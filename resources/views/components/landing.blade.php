@@ -39,6 +39,11 @@
     </head>
     <body class="font-sans antialiased bg-gradient-to-br from-slate-900 via-slate-800 to-black animate-gradient-xy text-white text-center m-0 p-0" style="background-size: 400% 400%;">
         <canvas class="absolute top-0 left-0 -z-10"></canvas>
+
+        <link rel="stylesheet" href="{{asset('assets/styles/bg-gradient.css')}}">
+
+    </head>
+    <body class="font-sans antialiased bg-neutral-100 dark:bg-neutral-950">
         <div class="min-h-screen">
             <x-landing-header />
 
