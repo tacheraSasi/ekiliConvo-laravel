@@ -51,6 +51,7 @@ export default {
                 'slide-up': 'slideUp 0.3s ease-out',
                 'pulse-soft': 'pulseSoft 2s infinite',
                 'float': 'float 3s ease-in-out infinite',
+                'gradient-xy': 'gradient-xy 10s ease infinite',
             },
             keyframes: {
                 fadeIn: {
@@ -68,6 +69,11 @@ export default {
                 float: {
                     '0%, 100%': { transform: 'translateY(0px)' },
                     '50%': { transform: 'translateY(-10px)' },
+                },
+                'gradient-xy': {
+                    '0%': { 'background-position': '0% 50%' },
+                    '50%': { 'background-position': '100% 50%' },
+                    '100%': { 'background-position': '0% 50%' },
                 },
             },
             boxShadow: {
