@@ -8,11 +8,11 @@
     <div class="mb-8">
         <div class="flex justify-between items-center">
             <div>
-                <h1 class="text-3xl font-bold text-gray-900">Analytics Dashboard</h1>
-                <p class="text-gray-600 mt-2">Insights into your ekiliConvo activity and performance</p>
+                <h1 class="text-3xl font-bold text-neutral-900">Analytics Dashboard</h1>
+                <p class="text-neutral-600 mt-2">Insights into your ekiliConvo activity and performance</p>
             </div>
             <div class="flex space-x-4">
-                <select id="time-range" class="rounded-md border-gray-300 shadow-sm">
+                <select id="time-range" class="rounded-md border-neutral-300 shadow-sm">
                     <option value="7" {{ $days == 7 ? 'selected' : '' }}>Last 7 days</option>
                     <option value="30" {{ $days == 30 ? 'selected' : '' }}>Last 30 days</option>
                     <option value="90" {{ $days == 90 ? 'selected' : '' }}>Last 90 days</option>
@@ -30,11 +30,11 @@
     <!-- Metrics Grid -->
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
         <!-- Total Rooms -->
-        <div class="bg-white rounded-lg shadow-sm p-6 border border-gray-200">
+        <div class="bg-white rounded-lg shadow-sm p-6 border border-neutral-200">
             <div class="flex items-center justify-between">
                 <div>
-                    <p class="text-sm font-medium text-gray-600">Total Rooms</p>
-                    <p class="text-3xl font-bold text-gray-900">{{ $metrics['total_rooms'] }}</p>
+                    <p class="text-sm font-medium text-neutral-600">Total Rooms</p>
+                    <p class="text-3xl font-bold text-neutral-900">{{ $metrics['total_rooms'] }}</p>
                 </div>
                 <div class="p-3 bg-blue-100 rounded-full">
                     <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -43,16 +43,16 @@
                 </div>
             </div>
             <div class="mt-4">
-                <span class="text-sm text-gray-500">You created {{ $metrics['user_created_rooms'] }} rooms</span>
+                <span class="text-sm text-neutral-500">You created {{ $metrics['user_created_rooms'] }} rooms</span>
             </div>
         </div>
 
         <!-- Joined Rooms -->
-        <div class="bg-white rounded-lg shadow-sm p-6 border border-gray-200">
+        <div class="bg-white rounded-lg shadow-sm p-6 border border-neutral-200">
             <div class="flex items-center justify-between">
                 <div>
-                    <p class="text-sm font-medium text-gray-600">Rooms Joined</p>
-                    <p class="text-3xl font-bold text-gray-900">{{ $metrics['user_joined_rooms'] }}</p>
+                    <p class="text-sm font-medium text-neutral-600">Rooms Joined</p>
+                    <p class="text-3xl font-bold text-neutral-900">{{ $metrics['user_joined_rooms'] }}</p>
                 </div>
                 <div class="p-3 bg-green-100 rounded-full">
                     <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -61,16 +61,16 @@
                 </div>
             </div>
             <div class="mt-4">
-                <span class="text-sm text-gray-500">{{ $metrics['active_rooms'] }} active in last {{ $days }} days</span>
+                <span class="text-sm text-neutral-500">{{ $metrics['active_rooms'] }} active in last {{ $days }} days</span>
             </div>
         </div>
 
         <!-- Total Sessions -->
-        <div class="bg-white rounded-lg shadow-sm p-6 border border-gray-200">
+        <div class="bg-white rounded-lg shadow-sm p-6 border border-neutral-200">
             <div class="flex items-center justify-between">
                 <div>
-                    <p class="text-sm font-medium text-gray-600">Total Sessions</p>
-                    <p class="text-3xl font-bold text-gray-900">{{ number_format($metrics['total_sessions']) }}</p>
+                    <p class="text-sm font-medium text-neutral-600">Total Sessions</p>
+                    <p class="text-3xl font-bold text-neutral-900">{{ number_format($metrics['total_sessions']) }}</p>
                 </div>
                 <div class="p-3 bg-purple-100 rounded-full">
                     <svg class="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -79,16 +79,16 @@
                 </div>
             </div>
             <div class="mt-4">
-                <span class="text-sm text-gray-500">Platform-wide meetings</span>
+                <span class="text-sm text-neutral-500">Platform-wide meetings</span>
             </div>
         </div>
 
         <!-- Your Notes & Tasks -->
-        <div class="bg-white rounded-lg shadow-sm p-6 border border-gray-200">
+        <div class="bg-white rounded-lg shadow-sm p-6 border border-neutral-200">
             <div class="flex items-center justify-between">
                 <div>
-                    <p class="text-sm font-medium text-gray-600">Your Notes</p>
-                    <p class="text-3xl font-bold text-gray-900">{{ $metrics['user_total_notes'] }}</p>
+                    <p class="text-sm font-medium text-neutral-600">Your Notes</p>
+                    <p class="text-3xl font-bold text-neutral-900">{{ $metrics['user_total_notes'] }}</p>
                 </div>
                 <div class="p-3 bg-yellow-100 rounded-full">
                     <svg class="w-6 h-6 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -97,7 +97,7 @@
                 </div>
             </div>
             <div class="mt-4">
-                <span class="text-sm text-gray-500">{{ $metrics['user_pending_tasks'] }} pending tasks</span>
+                <span class="text-sm text-neutral-500">{{ $metrics['user_pending_tasks'] }} pending tasks</span>
             </div>
         </div>
     </div>
@@ -105,13 +105,13 @@
     <!-- Charts Section -->
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
         <!-- Activity Chart -->
-        <div class="bg-white rounded-lg shadow-sm p-6 border border-gray-200">
-            <h3 class="text-lg font-semibold text-gray-900 mb-4">Platform Activity</h3>
+        <div class="bg-white rounded-lg shadow-sm p-6 border border-neutral-200">
+            <h3 class="text-lg font-semibold text-neutral-900 mb-4">Platform Activity</h3>
             <div id="activity-chart" class="h-64">
                 <!-- Chart will be rendered here by JavaScript -->
-                <div class="flex items-center justify-center h-full text-gray-500">
+                <div class="flex items-center justify-center h-full text-neutral-500">
                     <div class="text-center">
-                        <svg class="w-12 h-12 mx-auto mb-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg class="w-12 h-12 mx-auto mb-4 text-neutral-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
                         </svg>
                         <p>Activity analytics chart will be displayed here</p>
@@ -122,16 +122,16 @@
         </div>
 
         <!-- Quality Metrics -->
-        <div class="bg-white rounded-lg shadow-sm p-6 border border-gray-200">
-            <h3 class="text-lg font-semibold text-gray-900 mb-4">Connection Quality</h3>
+        <div class="bg-white rounded-lg shadow-sm p-6 border border-neutral-200">
+            <h3 class="text-lg font-semibold text-neutral-900 mb-4">Connection Quality</h3>
             <div id="quality-metrics" class="h-64">
-                <div class="flex items-center justify-center h-full text-gray-500">
+                <div class="flex items-center justify-center h-full text-neutral-500">
                     <div class="text-center">
                         <div class="w-24 h-24 mx-auto mb-4 bg-green-100 rounded-full flex items-center justify-center">
                             <span class="text-2xl font-bold text-green-600">98%</span>
                         </div>
-                        <p class="text-lg font-semibold text-gray-700">Average Quality Score</p>
-                        <p class="text-sm text-gray-500">Excellent connection quality</p>
+                        <p class="text-lg font-semibold text-neutral-700">Average Quality Score</p>
+                        <p class="text-sm text-neutral-500">Excellent connection quality</p>
                     </div>
                 </div>
             </div>
@@ -139,13 +139,13 @@
     </div>
 
     <!-- Recent Rooms -->
-    <div class="bg-white rounded-lg shadow-sm border border-gray-200">
-        <div class="px-6 py-4 border-b border-gray-200">
-            <h3 class="text-lg font-semibold text-gray-900">Recent Rooms</h3>
+    <div class="bg-white rounded-lg shadow-sm border border-neutral-200">
+        <div class="px-6 py-4 border-b border-neutral-200">
+            <h3 class="text-lg font-semibold text-neutral-900">Recent Rooms</h3>
         </div>
-        <div class="divide-y divide-gray-200">
+        <div class="divide-y divide-neutral-200">
             @forelse($recentRooms as $room)
-            <div class="px-6 py-4 hover:bg-gray-50 transition-colors">
+            <div class="px-6 py-4 hover:bg-neutral-50 transition-colors">
                 <div class="flex items-center justify-between">
                     <div class="flex items-center space-x-4">
                         <div class="flex-shrink-0">
@@ -156,10 +156,10 @@
                             </div>
                         </div>
                         <div>
-                            <h4 class="text-sm font-medium text-gray-900">{{ $room->name }}</h4>
-                            <p class="text-sm text-gray-500">
-                                {{ $room->pivot->role_in_room === 'host' ? 'Host' : 'Participant' }} • 
-                                {{ $room->total_sessions }} sessions • 
+                            <h4 class="text-sm font-medium text-neutral-900">{{ $room->name }}</h4>
+                            <p class="text-sm text-neutral-500">
+                                {{ $room->pivot->role_in_room === 'host' ? 'Host' : 'Participant' }} •
+                                {{ $room->total_sessions }} sessions •
                                 @if($room->last_activity_at)
                                     Last active {{ $room->last_activity_at->diffForHumans() }}
                                 @else
@@ -179,8 +179,8 @@
                 </div>
             </div>
             @empty
-            <div class="px-6 py-8 text-center text-gray-500">
-                <svg class="w-12 h-12 mx-auto mb-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div class="px-6 py-8 text-center text-neutral-500">
+                <svg class="w-12 h-12 mx-auto mb-4 text-neutral-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
                 </svg>
                 <p>No rooms found. <a href="/rooms/create" class="text-blue-600 hover:text-blue-800">Create your first room</a></p>
@@ -207,7 +207,7 @@ async function loadAnalyticsData() {
                 'Content-Type': 'application/json'
             }
         });
-        
+
         if (response.ok) {
             const data = await response.json();
             renderActivityChart(data.daily_activity);
@@ -222,7 +222,7 @@ function renderActivityChart(data) {
     const chartContainer = document.getElementById('activity-chart');
     // This would integrate with a charting library like Chart.js or D3.js
     chartContainer.innerHTML = `
-        <div class="text-center text-gray-500 mt-8">
+        <div class="text-center text-neutral-500 mt-8">
             <p>Activity chart would be rendered here with real data</p>
             <p class="text-sm mt-2">Data points: ${data?.length || 0}</p>
         </div>

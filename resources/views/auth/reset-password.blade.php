@@ -2,8 +2,8 @@
     <div class="space-y-6">
         <!-- Header -->
         <div class="text-center">
-            <h2 class="text-2xl font-bold text-gray-900 dark:text-white">Reset Your Password</h2>
-            <p class="mt-2 text-sm text-gray-600 dark:text-gray-400">Enter your new password below</p>
+            <h2 class="text-2xl font-bold text-neutral-900 dark:text-white">Reset Your Password</h2>
+            <p class="mt-2 text-sm text-neutral-600 dark:text-neutral-400">Enter your new password below</p>
         </div>
 
         <form method="POST" action="{{ route('password.store') }}" class="space-y-6">
@@ -14,20 +14,20 @@
 
             <!-- Email Address -->
             <div class="space-y-2">
-                <x-input-label for="email" :value="__('Email Address')" class="text-gray-700 dark:text-gray-300 font-medium" />
+                <x-input-label for="email" :value="__('Email Address')" class="text-neutral-700 dark:text-neutral-300 font-medium" />
                 <div class="relative">
                     <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                        <svg class="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg class="h-5 w-5 text-neutral-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207" />
                         </svg>
                     </div>
-                    <x-text-input id="email" 
-                        class="form-input pl-10 w-full bg-gray-100 dark:bg-gray-600" 
-                        type="email" 
-                        name="email" 
-                        :value="old('email', $request->email)" 
-                        required 
-                        autofocus 
+                    <x-text-input id="email"
+                        class="form-input pl-10 w-full bg-neutral-100 dark:bg-neutral-600"
+                        type="email"
+                        name="email"
+                        :value="old('email', $request->email)"
+                        required
+                        autofocus
                         autocomplete="username"
                         readonly />
                 </div>
@@ -36,18 +36,18 @@
 
             <!-- Password -->
             <div class="space-y-2">
-                <x-input-label for="password" :value="__('New Password')" class="text-gray-700 dark:text-gray-300 font-medium" />
+                <x-input-label for="password" :value="__('New Password')" class="text-neutral-700 dark:text-neutral-300 font-medium" />
                 <div class="relative">
                     <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                        <svg class="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg class="h-5 w-5 text-neutral-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
                         </svg>
                     </div>
-                    <x-text-input id="password" 
-                        class="form-input pl-10 w-full" 
-                        type="password" 
-                        name="password" 
-                        required 
+                    <x-text-input id="password"
+                        class="form-input pl-10 w-full"
+                        type="password"
+                        name="password"
+                        required
                         autocomplete="new-password"
                         placeholder="Enter your new password" />
                 </div>
@@ -56,18 +56,18 @@
 
             <!-- Confirm Password -->
             <div class="space-y-2">
-                <x-input-label for="password_confirmation" :value="__('Confirm New Password')" class="text-gray-700 dark:text-gray-300 font-medium" />
+                <x-input-label for="password_confirmation" :value="__('Confirm New Password')" class="text-neutral-700 dark:text-neutral-300 font-medium" />
                 <div class="relative">
                     <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                        <svg class="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg class="h-5 w-5 text-neutral-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>
                     </div>
-                    <x-text-input id="password_confirmation" 
+                    <x-text-input id="password_confirmation"
                         class="form-input pl-10 w-full"
                         type="password"
-                        name="password_confirmation" 
-                        required 
+                        name="password_confirmation"
+                        required
                         autocomplete="new-password"
                         placeholder="Confirm your new password" />
                 </div>
@@ -110,7 +110,7 @@
 
                 <!-- Back to Login -->
                 <div class="text-center">
-                    <p class="text-sm text-gray-600 dark:text-gray-400">
+                    <p class="text-sm text-neutral-600 dark:text-neutral-400">
                         Remember your password?
                         <a href="{{ route('login') }}" class="font-medium text-brand-secondary hover:text-brand-primary transition-colors duration-200">
                             Back to login

@@ -36,9 +36,9 @@
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
         <link rel="stylesheet" href="{{asset('assets/styles/bg-gradient.css')}}">
-        
+
     </head>
-    <body class="font-sans antialiased bg-gray-100 dark:bg-neutral-950">
+    <body class="font-sans antialiased bg-neutral-100 dark:bg-neutral-950">
         <div class="min-h-screen">
             <x-landing-header />
 

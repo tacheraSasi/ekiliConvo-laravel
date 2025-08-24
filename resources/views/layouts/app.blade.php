@@ -30,7 +30,7 @@
 
         <!-- Canonical URL -->
         <link rel="canonical" href="https://insights.ekilie.com/insights/{{ $insight->id }}" />
-        
+
         <!-- Schema.org markup for Google -->
         <script type="application/ld+json">
         {
@@ -77,13 +77,13 @@
     {{-- <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script> --}}
 </head>
 
-<body class="font-sans antialiased bg-gray-50 dark:bg-slate-900 text-gray-900 dark:text-slate-100">
+<body class="font-sans antialiased bg-neutral-50 dark:bg-slate-900 text-neutral-900 dark:text-slate-100">
     <div class="min-h-screen">
         @include('layouts.navigation')
 
         <!-- Page Heading -->
         @isset($header)
-            <header class="bg-white dark:bg-slate-800 shadow-sm border-b border-gray-200 dark:border-slate-700">
+            <header class="bg-white dark:bg-slate-800 shadow-sm border-b border-neutral-200 dark:border-slate-700">
                 <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
                     {{ $header }}
                 </div>
